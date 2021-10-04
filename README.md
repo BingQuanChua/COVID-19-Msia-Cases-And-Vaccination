@@ -1,4 +1,4 @@
-# Unknown-Data-Mining-Project
+# COVID-19 Malaysia Cases and Vaccination
 
 Our work must consist of 
 - 1️⃣ association rule mining algorithm, 
@@ -7,13 +7,6 @@ Our work must consist of
 - 1️⃣ clustering technique.
 
 We must provide visualization to your findings and analyze them accordingly.
-
-Question 1 🧺 or Question 2 💉 ??
-
-## Q1 🧺: Profiling Customers in a Self-Service Coin Laundry Shop
-
-✔ Pros: Association rule mining  
-❌ Cons: Data neeed to be cleaned, extra dataset need to be found  
 
 ## Q2 💉: Malaysia COVID-19 Cases and Vaccination
 
