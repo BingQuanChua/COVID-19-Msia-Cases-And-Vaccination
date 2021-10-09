@@ -13,10 +13,13 @@ We must provide visualization to your findings and analyze them accordingly.
 ✔ Pros: Can work on top our [Assignment](https://github.com/BingQuanChua/COVID-19-Msia-Mining)  
 ❌ Cons: No idea for association rule mining for now  
 
-### datasets
+### datasets	
+
+Data taken as of **`6-10-2021`**
 
 Covid-19 Open Data:
 https://github.com/MoH-Malaysia/covid19-public
 
 Vaccination Data:
 https://github.com/CITF-Malaysia/citf-public
+

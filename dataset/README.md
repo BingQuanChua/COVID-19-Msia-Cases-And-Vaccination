@@ -6,7 +6,9 @@
 
 ---
 
-### Cases and Testing
+## 📁Epidemic
+
+#### Cases and Testing
 
 1) [`cases_malaysia.csv`](/epidemic/cases_malaysia.csv): Daily recorded COVID-19 cases at country level, as of 1200 of date.
 2) [`cases_state.csv`](/epidemic/cases_state.csv): Daily recorded COVID-19 cases at state level, as of 1200 of date.
@@ -14,20 +16,20 @@
 4) [`tests_malaysia.csv`](/epidemic/tests_malaysia.csv): Daily tests (note: not necessarily unique individuals) by type at country level, as of 2359 of date.
 4) [`tests_state.csv`](/epidemic/tests_malaysia.csv): Daily tests (note: not necessarily unique individuals) by type at state level, as of 2359 of date.
 
-### Healthcare
+#### Healthcare
 
 1) [`pkrc.csv`](/epidemic/pkrc.csv): Flow of patients to/out of Covid-19 Quarantine and Treatment Centres (PKRC), with capacity and utilisation as of 2359 of date.
 2) [`hospital.csv`](/epidemic/hospital.csv): Flow of patients to/out of hospitals, with capacity and utilisation as of 2359 of date.
 3) [`icu.csv`](/epidemic/icu.csv): Capacity and utilisation of intensive care unit (ICU) beds as of 2359 of date.
 
-### Deaths
+#### Deaths
 
 1) [`deaths_malaysia.csv`](/epidemic/deaths_malaysia.csv): Daily deaths due to COVID-19 at country level, as of 1200 of date.
 2) [`deaths_state.csv`](/epidemic/deaths_state.csv): Daily deaths due to COVID-19 at state level, as of 1200 of date.
 
-### Vaccination
 
-MoH collaborates with MoSTI and the COVID-19 Immunisation Task Force (CITF) to publish open data on Malaysia's vaccination rollout. All relevant data can be found at [this repo](https://github.com/CITF-Malaysia/citf-public).
+
+## 📁MySejahtera
 
 ### Mobility and Contact Tracing
 
@@ -36,8 +38,21 @@ MoH collaborates with MoSTI and the COVID-19 Immunisation Task Force (CITF) to p
 3) [`checkin_malaysia_time.csv`](/mysejahtera/checkin_malaysia_time.csv): Time distribution of daily checkins on MySejahtera at country level, as of 2359 of date.
 4) [`trace_malaysia.csv`](/mysejahtera/trace_malaysia.csv): Daily casual contacts traced and hotspots identified by HIDE, at country level, as of 2359 of date.
 
-### Static data
+## 📁Registration
+
+1) [`vaxreg_malaysia.csv`](/registration/vaxreg_malaysia.csv): Cumulative registrations for vaccination at country level, as at 2359 of date.
+2) [`vaxreg_state.csv`](/registration/vaxreg_state.csv): Cumulative registrations vaccination at state level, as at 2359 of date.
+
+## 📁Static
 
 1) [`population.csv`](/static/population.csv): Total, adult (≥18), and elderly (≥60) population at state level.
 
 _Static data will (probably) remain unchanged for the duration of the program, barring an update from the source, e.g. if DOSM makes an update to population estimates. We provide this data here not to supersede the source, but rather to be transparent about the data we use to compute key statistics e.g. the % of the population that is vaccinated. We also hope this ensures synchronisation (across various independent analysts) of key statistics down to the Nth decimal place._
+
+## 📁Vaccination
+
+MoH collaborates with MoSTI and the COVID-19 Immunisation Task Force (CITF) to publish open data on Malaysia's vaccination rollout. All relevant data can be found at [this repo](https://github.com/CITF-Malaysia/citf-public).
+
+1) [`vax_malaysia.csv`](/vaccination/vax_malaysia.csv): Daily and cumulative vaccination at country level, as at 2359 of date.
+2) [`vax_state.csv`](/vaccination/vax_state.csv): Daily and cumulative vaccination at state level, as at 2359 of date.
+
