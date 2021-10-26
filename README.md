@@ -12,7 +12,7 @@ We must provide visualization to your findings and analyze them accordingly.
 
 An in-depth extension of our previous [Assignment](https://github.com/BingQuanChua/COVID-19-Msia-Mining).
 
-### datasets	
+### Datasets	
 
 Data taken as of **`6-10-2021`**
 
@@ -24,3 +24,8 @@ https://github.com/CITF-Malaysia/citf-public
 
 ❌ datasets that are not in use: `clusters.csv`, `hospital.csv`, `icu.csv`, `pkrc.csv`
 
+## References
+
+[COVID-19: What Is Hidden Behind the Official Numbers?](https://towardsdatascience.com/which-countries-are-affected-the-most-by-covid-19-4d4570852e31)
+
+[Data Visualization: Deploying an Interactive Map as a Web App with Heroku](https://medium.com/analytics-vidhya/data-visualization-deploying-an-interactive-map-as-a-web-app-with-heroku-51a323029e4)

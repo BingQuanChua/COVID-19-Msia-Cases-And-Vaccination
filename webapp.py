@@ -38,7 +38,7 @@ states.geojson.add_child(
 )
 
 st.title("Malaysia COVID-19 Cases and Vaccination")
-option = st.checkbox('Show Map')
+option = st.checkbox('Show Map (this might take a while)')
 
 if option:
     # adding map layers
