@@ -24,8 +24,7 @@ https://github.com/CITF-Malaysia/citf-public
 
 ❌ datasets that are not in use: `clusters.csv`, `hospital.csv`, `icu.csv`, `pkrc.csv`
 
-## References
+### References
 
-[COVID-19: What Is Hidden Behind the Official Numbers?](https://towardsdatascience.com/which-countries-are-affected-the-most-by-covid-19-4d4570852e31)
-
-[Data Visualization: Deploying an Interactive Map as a Web App with Heroku](https://medium.com/analytics-vidhya/data-visualization-deploying-an-interactive-map-as-a-web-app-with-heroku-51a323029e4)
+1. [COVID-19: What Is Hidden Behind the Official Numbers?](https://towardsdatascience.com/which-countries-are-affected-the-most-by-covid-19-4d4570852e31)
+2. [Data Visualization: Deploying an Interactive Map as a Web App with Heroku](https://medium.com/analytics-vidhya/data-visualization-deploying-an-interactive-map-as-a-web-app-with-heroku-51a323029e4)
