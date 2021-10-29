@@ -57,7 +57,7 @@ def page_dashboard():
         filtered_cases_malaysia = cases_malaysia[(cases_malaysia['date'] >= first_date) & (cases_malaysia['date'] <= second_date)]
 
         if len(filtered_cases_malaysia) == 0:
-            st.write('No available data')
+            st.error('No available data! Please select another set of date range.')
         else:
             col1, col2 = st.beta_columns(2)
 

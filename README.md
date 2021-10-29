@@ -1,5 +1,7 @@
 # Malaysia COVID-19 Cases and Vaccination
 
+An in-depth extension of our previous [Assignment](https://github.com/BingQuanChua/COVID-19-Msia-Mining).
+
 Our work must consist of 
 - ~~1️⃣ association rule mining algorithm,~~ => change to :one: of the below
 - at least 2️⃣ classification models, 
@@ -8,11 +10,7 @@ Our work must consist of
 
 We must provide visualization to your findings and analyze them accordingly.
 
-## Q2 💉: Malaysia COVID-19 Cases and Vaccination
-
-An in-depth extension of our previous [Assignment](https://github.com/BingQuanChua/COVID-19-Msia-Mining).
-
-### Datasets	
+## 📚Datasets	
 
 Data taken as of **`6-10-2021`**
 
@@ -24,7 +22,28 @@ https://github.com/CITF-Malaysia/citf-public
 
 ❌ datasets that are not in use: `clusters.csv`, `hospital.csv`, `icu.csv`, `pkrc.csv`
 
-### References
+## 📋To-Do List
+
+Exploratory Data Analysis
+
+- [ ] A little bit more
+
+Data Mining Questions
+
+- [ ] Clustering Analysis 
+- [ ] Time Series Regression
+- [ ] Classification
+- [ ] one more question
+
+Deployment
+
+- [ ] Streamlit webapp
+
+Project report
+
+- [ ] Report typed in $\LaTeX$
+
+## 📑References
 
 1. [COVID-19: What Is Hidden Behind the Official Numbers?](https://towardsdatascience.com/which-countries-are-affected-the-most-by-covid-19-4d4570852e31)
 2. [Data Visualization: Deploying an Interactive Map as a Web App with Heroku](https://medium.com/analytics-vidhya/data-visualization-deploying-an-interactive-map-as-a-web-app-with-heroku-51a323029e4)
