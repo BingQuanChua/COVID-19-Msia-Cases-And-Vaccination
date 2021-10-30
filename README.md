@@ -51,3 +51,5 @@ Project report
 3. [How to Develop LSTM Models for Time Series Forecasting](https://machinelearningmastery.com/how-to-develop-lstm-models-for-time-series-forecasting/)
 
 4. [Time Series Prediction with LSTM Recurrent Neural Networks in Python with Keras](https://machinelearningmastery.com/time-series-prediction-lstm-recurrent-neural-networks-python-keras/)
+5. [](https://machinelearningmastery.com/evaluate-performance-deep-learning-models-keras/)
+6. [](https://machinelearningmastery.com/multivariate-time-series-forecasting-lstms-keras/)
