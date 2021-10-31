@@ -13,7 +13,7 @@ from datetime import datetime, date
 cases_malaysia = pickle.load(open('pickle_files/cases_malaysia.pkl', 'rb'))
 
 # read the Malaysia states geojson file
-df_map = gp.read_file('msia-states.json')
+df_map = gp.read_file('map/msia-states.json')
 
 st.set_page_config(layout="wide")
 
