@@ -74,7 +74,7 @@ def page_dashboard():
 def page_clustering():
 
     st.title('🧩Clustering Analysis')
-    st.write('## **How well does each state handle COVID-19 cases based on pass COVID-19 cases and deaths records?**')
+    st.write('## **How well does each state handle COVID-19 cases based on past COVID-19 cases and deaths records?**')
 
     df_map.cluster_cases = df_map.cluster_cases.astype('string')
     df_map.cluster_deaths = df_map.cluster_deaths.astype('string')
