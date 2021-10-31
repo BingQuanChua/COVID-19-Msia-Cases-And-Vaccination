@@ -4,7 +4,6 @@ import pandas as pd
 import altair as alt
 from streamlit_folium import folium_static
 import folium
-import geopandas as gp
 import pickle
 import plotly.express as px
 from datetime import datetime, date
