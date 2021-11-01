@@ -271,6 +271,12 @@ def page_classification():
     im = Image.open('images/DM_class_reg_confusionMatrix2.png')
     st.image(im,width=800, caption='Confusion Matrix')
 
+    st.write('### Precision & Recall')
+    im = Image.open('images/DM_class_ROC1.png')
+    st.image(im,width=800, caption='F1-Score')
+    im = Image.open('images/DM_class_ROC1.png')
+    st.image(im,width=800, caption='F1-Score')
+
 
 def page_time_series_regression():
 
