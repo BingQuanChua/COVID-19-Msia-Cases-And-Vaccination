@@ -19,13 +19,21 @@ st.set_page_config(layout="wide")
 def main():
 
     # Sidebar
-    st.sidebar.header("Malaysia COVID-19 Cases and Vaccination")
-    st.sidebar.header("🧭Navigation")
+    st.sidebar.title("Malaysia COVID-19 Cases and Vaccination")
+    st.sidebar.write('''
+        presented by:  
+        Chua Bing Quan  
+        Liew Kuan Yung  
+        Soh Jing Guan  
+
+        ---
+    ''')
+    st.sidebar.subheader("🧭Navigation")
     choice = st.sidebar.radio("go to", ('Exploratory Data Analaysis', 'Clustering Analysis',
                               'Regression', 'Classification', 'Time-Series Regression'), index=0)
 
     if choice == 'Exploratory Data Analaysis':
-        page_dashboard()
+        page_eda()
     elif choice == 'Clustering Analysis':
         page_clustering()
     elif choice == 'Regression':
@@ -74,6 +82,94 @@ def page_dashboard():
                 fig = px.line(filtered_cases_malaysia, x='date', y=['cases_new', 'cases_recovered'],
                               title='Daily report COVID cases and cases recovered in Malaysia')
                 st.plotly_chart(fig, use_container_width=True)
+
+
+def page_eda():
+    st.title('🔎Exploratory Data Analaysis')
+
+    st.subheader('EDA 1: Analyse which group of population are more vulnerable to covid cases in Malaysia.')
+    
+    st.subheader('EDA 2: Analyse how covid cases vary across time dimensions at different granularity.')
+
+    st.subheader('EDA 3: What is the stationarity of the time-series dataset?')
+
+    st.subheader('EDA 4: What are the vaccination and registration rates per state in Malaysia?')
+
+    st.subheader('EDA 5: What are the types and total number of side effects for each type of vaccine?')
+
+    st.subheader('EDA 6: Which type of vaccine is given to more people?')
+
+    with st.expander('EDA 7 - Which states are recovering? Which of the states shows a decrease in the number of COVID-19 cases?'):
+        st.subheader('Which states are recovering? Which of the states shows a decrease in the number of COVID-19 cases?')
+        st.markdown('''
+            Since the number of vaccinated entities are increasing, there is a significant decrease in the number of COVID-19 cases in each state. By plotting the moving average of daily confirmed cases and the cumulative number of vaccinated persons against the dates, we can observe that there is a downward trend after the vaccination has reached a certain level in each of the states. The moving average of daily cases is obtained by averaging the number of daily cases in the past 7 days. 
+
+            To calculate the daily cumulative number of vaccinated persons, we start by calculating the number of people who completed their vaccination dose. This includes adding the 
+
+            * daily number of adults who has completed their 2nd dose of vaccine (either Pfizer, Sinovac or Astra)
+            * daily number of adults who has taken Cansino (since Cansino only requires 1 dose)
+            * daily number of children who complete their 2nd dose of Pfizer
+
+            These numbers are accumulated to obtain the daily cumulative number of vaccinated persons.    
+        ''')
+
+        for i in range(16):
+            im = Image.open('images/EDA07_{:02d}.png'.format(i+1))
+            st.image(im)
+
+        st.write('It is observed that the number of vaccinated people in some states has exceeded their state population. The two states that have this phenomena are Kuala Lumpur and Putrajaya. This might be due to foreigners receiving their vaccination shot in our country.')
+
+
+    with st.expander('EDA 8 - When is the time of the day with most MySejahtera check-ins?'):
+        st.subheader('When is the time of the day with most MySejahtera check-ins?')
+        st.markdown('''
+            checkin_malaysia_time.csv records the time distribution of daily check-ins on MySejahtera at the country level. The data records the number of check-ins nationwide in every 30 minutes interval.
+
+            By summing up each column in the dataset, we can obtain the total number of check-ins at each 30 minutes between 2020-12-01 to 2021-10-05, spanning over 309 days.
+        ''')
+        im = Image.open('images/EDA08_1.png')
+        st.image(im, caption='Total number of check-ins from MySejahtera data')
+        st.write('From the plot above, we can roughly observe 3 peaks, which are around 8am, 12pm, and 6pm respectively. Presumably these are the preferred hours for Malaysians to buy their meals.')
+
+
+    with st.expander('EDA 9 - What are the dates with the highest number of checkins? How does it correlate with the number of cases and deaths during the day?'):
+        st.subheader('What are the dates with the highest number of checkins? How does it correlate with the number of cases and deaths during the day?')
+        im = Image.open('images/EDA09_1.png')
+        st.image(im, caption='Daily number of confirmed cases, deaths, and check-ins')
+
+        col1, col2 = st.columns(2)
+        with col1:
+            st.markdown('''
+                The date with the highest number of checkins between 2020-12-01 and 2021-10-02 is 2021-04-03 (the 3rd of April 2021). On that day, the number of cases and deaths are considerably low. 
+                
+                In order to visualize the correlation between the daily number of cases and deaths with the daily number of check-ins, we have plotted a heatmap among these 3 attributes. 
+                
+                The heatmap shows that there is almost no correlation between them.
+            ''')
+        with col2:
+            im = Image.open('images/EDA09_2.png')
+            st.image(im, caption='Correlation heatmap')
+
+
+    with st.expander('EDA 10 - Rate of Serious Vaccine Side Effect  VS Covid Death Rate without obtaining vaccine, which one is more dangerous?'):
+        st.subheader('Rate of Serious Vaccine Side Effect  VS Covid Death Rate without obtaining vaccine, which one is more dangerous?')
+        st.markdown('''
+            Some people refuse to obtain vaccines because they think vaccines are dangerous and high risk. In this question, we will measure the rate of serious side effects of vaccination and covid death rate if without obtaining a vaccine to evaluate whether reducing it is a good choice or not. 
+            
+            We divide the total number of covid deaths without obtaining a vaccine and divide with the total number of people without obtaining a vaccine then multiply with 100 to obtain the rate of covid death without obtaining the vaccine. Besides, we sum out the number of serious side effect cases and divide the total number of people obtaining the vaccine then multiply it to 100 to obtain the rate of the serious side effect. We use both rates to multiply 1000 to obtain the number of death or serious side effects cases for every 1000 people. The figure above shows the results of the measures. As we can see, for every 1000 people, about 200 people without obtaining a vaccine will die because of covid. But only about 2 people may get a serious vaccine side effect for every 1000 people. 
+        ''')
+        col1, col2 = st.columns(2)
+        with col1:
+            im = Image.open('images/EDA10_1.png')
+            st.image(im, caption='Number of cases and serious side effect of vaccine amoung 1000 people')
+        with col2:
+            im = Image.open('images/EDA10_2.png')
+            st.image(im, caption='Raio of serious side effect in ratio of number of people not obtain vaccine and dead because of COVID (among 1000 people)')
+
+
+        st.markdown('''
+            The result at the left is evidence to show it is more dangerous if you do not obtain any vaccine. The figure  at the right shows the ratio of serious vaccine side effect cases in the number of covid deaths without obtaining any vaccine for every 1000 people. We can find a ratio of serious vaccine side effects not greater than 1%. So that, in a nutshell, obtaining a vaccine is a safer and smart decision to protect your life. 
+        ''')
 
 
 def page_clustering():
