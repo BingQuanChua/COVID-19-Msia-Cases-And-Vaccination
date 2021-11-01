@@ -87,11 +87,115 @@ def page_dashboard():
 def page_eda():
     st.title('🔎Exploratory Data Analaysis')
 
-    st.subheader('EDA 1: Analyse which group of population are more vulnerable to covid cases in Malaysia.')
-    
-    st.subheader('EDA 2: Analyse how covid cases vary across time dimensions at different granularity.')
+    with st.expander('EDA 1: Analyse which group of population are more vulnerable to covid cases in Malaysia.'):
+        st.subheader('Which group of population are more vulnerable to covid cases in Malaysia.')
 
-    st.subheader('EDA 3: What is the stationarity of the time-series dataset?')
+        im = Image.open('images/EDA01_1.png')
+        st.image(im, caption='Covid Cases Group By Age')
+        im = Image.open('images/EDA01_2.png')
+        st.image(im, caption='Covid Cases Group By Vaccination Status')
+        im = Image.open('images/EDA01_3.png')
+        st.image(im, caption='Covid Cases Group By Cluster Type')
+
+        st.write('Based on the observation, we can deduce that the population that are aged around 18-59, unvaccinated, and active in workfleids have the highest risk in getting covid-19.')
+
+    with st.expander('EDA 2: Analyse how covid cases vary across time dimensions at different granularity.'):
+        st.subheader('How covid cases vary across time dimensions at different granularity.')
+        
+        im = Image.open('images/EDA02_1.png')
+        st.image(im, caption='Covid Cases Over Weekday')
+        st.write('There is no clear indication showing that any particular day have more covid cases')
+
+        im = Image.open('images/EDA02_2.png')
+        st.image(im, caption='Covid Cases Over Week Number 2020')
+        im = Image.open('images/EDA02_3.png')
+        st.image(im, caption='Covid Cases Over Week Number 2021')
+        st.write('The cases tend to spike when it nears the end of the year (shown in both weeks and months). However, do not compare 2020 with 2021 because 2020 has a relatively smaller y range.')
+
+        im = Image.open('images/EDA02_4.png')
+        st.image(im, caption='Covid Cases Over Month 2020')
+        im = Image.open('images/EDA02_5.png')
+        st.image(im, caption='Covid Cases Over Month 2021')
+        st.write('Same oberservation based on week number, the cases tend to spike when it nears 3rd or 4th quater of the year. But beware the the relative scale of 2020 is not the same as 2021')
+        
+    with st.expander('EDA 3: What is the stationarity of the time-series dataset?'):
+        st.subheader('What is the stationarity of the time-series dataset?')
+
+        st.write('''In Econometrics, a stationary time series is one whose properties do not depend on the time at which the series is observed. Thus, time series with trends, or with seasonality,
+         are not stationary — the trend and seasonality will affect the value of the time series at different times. In order to identify the stationarity of the time series, we use Dickey Fuller test''')
+
+        im = Image.open('images/EDA03_1.png')
+        st.image(im, caption='Covid Cases')
+        st.markdown('''
+        Reuslts of Dickey-Fuller Test for Covid Cases:
+
+        | Test                           | Reuslts   |
+        | ------------------------------ | ----------|
+        | Test Statistic                 | -2.878612 |
+        | p-value                        | 0.047892  |
+        | #Lags Used                     | 19.000000 |
+        | Number of Observations Used    | 600.000000|
+        | Critical Value (1%)            | -3.441296 |
+        | Critical Value (5%)            | -2.866369 |
+        | Critical Value (10%)           | -2.569342 |
+
+        Null hypothesis accepted, time series has non-stationarity
+        ''')
+        im = Image.open('images/EDA03_3.png')
+        st.image(im, caption='Covid Deaths')
+        st.markdown('''
+        Reuslts of Dickey-Fuller Test for Covid Deaths:
+
+        | Test                           | Reuslts   |
+        | ------------------------------ | ----------|
+        |Test Statistic                  |-3.412172  |
+        |p-value                         | 0.010551  |
+        |#Lags Used                      |19.000000  |
+        |Number of Observations Used     |548.000000 |
+        |Critical Value (1%)             |-3.442339  |
+        |Critical Value (5%)             |-2.866829  |
+        |Critical Value (10%)            |-2.569587  |
+
+        Null hypothesis accepted, time series has non-stationarity
+        ''')
+
+
+        im = Image.open('images/EDA03_4.png')
+        st.image(im, caption='Covid Trace')
+        st.markdown('''
+        Reuslts of Dickey-Fuller Test for Covid Deaths:
+
+        | Test                           | Reuslts   |
+        | ------------------------------ | ----------|
+        |Test Statistic                  |-2.089453  |
+        |p-value                         | 0.248777  |
+        |#Lags Used                      | 7.000000  |
+        |Number of Observations Used     |160.000000 |
+        |Critical Value (1%)             |-3.471896  |
+        |Critical Value (5%)             |-2.879780  |
+        |Critical Value (10%)            |-2.576495  |
+
+        Null hypothesis accepted, time series has non-stationarity
+        ''')
+        
+        im = Image.open('images/EDA03_2.png')
+        st.image(im, caption='MySejahtera Checkins')
+        st.markdown('''
+        Reuslts of Dickey-Fuller Test: for Covid Checkins
+
+        | Test                           | Reuslts   |
+        | ------------------------------ | ----------|
+        |Test Statistic                  |-1.134774  |
+        |p-value                         | 0.701007  |
+        |#Lags Used                      |14.000000  |
+        |Number of Observations Used     |294.000000 |
+        |Critical Value (1%)             |-3.452790  |
+        |Critical Value (5%)             |-2.871422  |
+        |Critical Value (10%)            |-2.572035  |
+
+        Null hypothesis accepted, time series has non-stationarity
+        ''')
+        
 
     st.subheader('EDA 4: What are the vaccination and registration rates per state in Malaysia?')
 
