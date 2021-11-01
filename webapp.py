@@ -21,10 +21,10 @@ def main():
     # Sidebar
     st.sidebar.header("Malaysia COVID-19 Cases and Vaccination")
     st.sidebar.header("🧭Navigation")
-    choice = st.sidebar.radio("go to", ('Dashboard', 'Clustering Analysis',
+    choice = st.sidebar.radio("go to", ('Exploratory Data Analaysis', 'Clustering Analysis',
                               'Regression', 'Classification', 'Time-Series Regression'), index=0)
 
-    if choice == 'Dashboard':
+    if choice == 'Exploratory Data Analaysis':
         page_dashboard()
     elif choice == 'Clustering Analysis':
         page_clustering()
@@ -63,7 +63,7 @@ def page_dashboard():
         if len(filtered_cases_malaysia) == 0:
             st.error('No available data! Please select another set of date range.')
         else:
-            col1, col2 = st.beta_columns(2)
+            col1, col2 = st.columns(2)
 
             with col1:
                 st.write('## **Data Frame**')
@@ -112,7 +112,7 @@ def page_clustering():
 
     st.plotly_chart(fig, use_container_width=True)
 
-    col1, col2 = st.beta_columns([2, 1])
+    col1, col2 = st.columns([2, 1])
     with col1:
         
         if cluster == 'Daily COVID-19 Cases':
@@ -155,6 +155,9 @@ def page_clustering():
 
     with st.beta_expander('Tips'):
         st.write('Select clustering based on a differnt parameter above to get more results.')
+
+        
+def page_regression():
 
     st.title('📈Regression Models')
     st.write('''In short, this section explains how we use historical cases data (data from past 7 days) to predict cases 
@@ -248,7 +251,7 @@ def page_time_series_regression():
     
     ### model 1
     st.subheader('LSTM-based RNN')
-    col1, col2 = st.beta_columns(2)
+    col1, col2 = st.columns(2)
     with col1:
         st.markdown('''
             The first time-series regression model is a single variate LSTM-based RNN model. The number of daily cases is separated into a train and test set on 2021-07-01. The training set has a total of 523 days and the test set has a total of 97 days.
@@ -273,7 +276,7 @@ def page_time_series_regression():
         After observing the correlationship between `cases_new` and other attributes from various datasets (cases_malaysia, tests_malaysia, deaths_malaysia, checkin_malaysia, vax_malaysia and vaxreg_malaysia). We found that the features with higher correlation (>= 0.9 positively or negatively) are:
     ''')
 
-    col1, col2 = st.beta_columns([1,2])
+    col1, col2 = st.columns([1,2])
     with col1:
         st.markdown('''
             `cases_recovered`,  
