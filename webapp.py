@@ -64,6 +64,7 @@ def page_eda():
 
         st.write('Based on the observation, we can deduce that the population that are aged around 18-59, unvaccinated, and active in workfleids have the highest risk in getting covid-19.')
 
+
     with st.expander('EDA 2: Analyse how covid cases vary across time dimensions at different granularity.', expanded=isExpand):
         st.subheader('How covid cases vary across time dimensions at different granularity.')
         
@@ -83,6 +84,7 @@ def page_eda():
         st.image(im, caption='Covid Cases Over Month 2021')
         st.write('Same oberservation based on week number, the cases tend to spike when it nears 3rd or 4th quater of the year. But beware the the relative scale of 2020 is not the same as 2021')
         
+    
     with st.expander('EDA 3: What is the stationarity of the time-series dataset?', expanded=isExpand):
         st.subheader('What is the stationarity of the time-series dataset?')
 
@@ -232,8 +234,34 @@ def page_eda():
             These numbers are accumulated to obtain the daily cumulative number of vaccinated persons.    
         ''')
 
-        for i in range(16):
-            im = Image.open('images/EDA07_{:02d}.png'.format(i+1))
+        states_dict = {
+            'Johor': 1,
+            'Kedah': 2,
+            'Kelantan': 3,
+            'Melaka': 4,
+            'Negeri Sembilan': 5,
+            'Pahang': 6,
+            'Perak': 7,
+            'Perlis': 8,
+            'Pulau Pinang': 9,
+            'Sabah': 10,
+            'Sarawak': 11,
+            'Selangor': 12,
+            'Terengganu': 13,
+            'W.P. Kuala Lumpur': 14,
+            'W.P. Labuan': 15,
+            'W.P. Putrajaya': 16
+        }
+
+        states = st.multiselect(
+            'Select states to plot the graph (select more to plot more)',
+            list(states_dict.keys()),
+            ['Selangor']
+        )
+
+        for state in states:
+            idx = states_dict.get(state)
+            im = Image.open('images/EDA07_{:02d}.png'.format(idx))
             st.image(im)
 
         st.write('It is observed that the number of vaccinated people in some states has exceeded their state population. The two states that have this phenomena are Kuala Lumpur and Putrajaya. This might be due to foreigners receiving their vaccination shot in our country.')
@@ -368,8 +396,8 @@ def page_clustering():
     st.write('')
     st.write('')
 
-    with st.expander('Tips'):
-        st.write('Select clustering based on a differnt parameter above to get more results.')
+    with st.expander('💡 Tips'):
+        st.info('Select clustering based on a differnt parameter above to get another set of results.')
 
         
 def page_regression():
