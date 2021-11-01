@@ -103,8 +103,15 @@ def page_clustering():
 
 def page_regression():
 
-    st.title('📈Regression Model')
-    st.video('https://youtu.be/o-YBDTqX_ZU') 
+    st.title('📈Time-Series Regression')
+    st.write('## **Is it possible for the government to predict the number of daily new cases accurately based on past data in order to deploy appropriate movement control measures?**')
+    st.markdown('''
+    
+    With an accurate forecast of the daily new cases, the government would be able to control the vaccination rate to tackle the pandemic effectively. We have implemented a time-series regression to forecast the number of COVID-19 cases in Malaysia. Two LSTM-based RNN is built to aid us in this problem.
+
+    ''')
+    st.subheader('LSTM-based RNN ')
+
 
 def page_classification():
 
