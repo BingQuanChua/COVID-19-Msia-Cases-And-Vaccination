@@ -20,7 +20,7 @@ def main():
 
     # Sidebar
     st.sidebar.header("🧭Navigation")
-    choice = st.sidebar.radio("go to", ('Dashboard', 'Clustering Analysis', 'Regression', 'Classification'), index=0)
+    choice = st.sidebar.radio("go to", ('Dashboard', 'Clustering Analysis', 'Regression', 'Classification', 'Time-Series Regression'), index=0)
 
     if choice == 'Dashboard':
         page_dashboard()
@@ -30,6 +30,8 @@ def main():
         page_regression()
     elif choice == 'Classification':
         page_classification()
+    elif choice == 'Time-Series Regression':
+        page_time_series_regression()
 
 
 
@@ -101,9 +103,21 @@ def page_clustering():
     st.write(df_map)
 
 
+
+
 def page_regression():
 
-    st.title('📈Time-Series Regression')
+    st.title('📈Regression Models')
+    st.write('Hello')
+
+def page_classification():
+
+    st.title('📊Classification Models')
+    st.write('Hello')
+
+def page_time_series_regression():
+
+    st.title('⏳Time-Series Regression')
     st.write('## **Is it possible for the government to predict the number of daily new cases accurately based on past data in order to deploy appropriate movement control measures?**')
     st.markdown('''
     
@@ -111,12 +125,6 @@ def page_regression():
 
     ''')
     st.subheader('LSTM-based RNN ')
-
-
-def page_classification():
-
-    st.title('📊Classification Model')
-    st.write('Hello')
 
 
 if __name__ == "__main__":
