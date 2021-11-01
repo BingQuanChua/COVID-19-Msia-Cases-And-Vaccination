@@ -342,11 +342,11 @@ def page_clustering():
         if cluster == 'Daily COVID-19 Cases':
             st.subheader('Clustering each states into 3 clusters according to daily cases')
             im = Image.open('images/CTR_1.png')
-            st.image(im,width=600, caption='Dividing each states into different clusters according to cases')
+            st.image(im, width=650, caption='Dividing each states into different clusters according to cases')
         else:
             st.subheader('Clustering each states into 3 clusters according to daily deaths')
             im = Image.open('images/CTR_2.png')
-            st.image(im,width=600, caption='Dividing each states into different clusters according to deaths')
+            st.image(im, width=650, caption='Dividing each states into different clusters according to deaths')
 
     with col2:
         st.subheader('States and their clusters')
@@ -405,18 +405,18 @@ def page_regression():
     
     col1, col2 = st.columns((5,5))
     im1 = Image.open('images/DM_class_reg_data_median_bin.png')
-    col1.image(im1,width=400, caption='5 equally distributed median')
+    col1.image(im1, width=400, caption='5 equally distributed median')
     im2 = Image.open('images/DM_class_reg_data_median_bin2.png')
-    col2.image(im2,width=400, caption='Sample bin median')
+    col2.image(im2, width=400, caption='Sample bin median')
 
     st.write('### Feature Importance')
     col1, col2 = st.columns([8, 9])
     im = Image.open('images/DM_class_reg_heatmap.png')
-    col1.image(im,width=500, caption='Heatmap for All Features')
+    col1.image(im, width=500, caption='Heatmap for All Features')
     im = Image.open('images/DM_class_reg_SHAP1.png')
-    col2.image(im,width=500, caption='SHAP values of each features')
+    col2.image(im, width=500, caption='SHAP values of each features')
     im = Image.open('images/DM_class_reg_SHAP2.png')
-    col2.image(im,width=500, caption='SHAP values of each features 2')
+    col2.image(im, width=500, caption='SHAP values of each features 2')
 
     st.markdown('''
     #### Regression Models
@@ -434,7 +434,7 @@ def page_regression():
     ''')
 
     st.write('''
-    EXample for Support Vector Regressor\n
+    Example for Support Vector Regressor\n
     ```
     reg_sv = SVR(kernel='linear')\n
     reg_sv = reg_sv.fit(X_train, np.ravel(y_train))\n
@@ -486,22 +486,28 @@ def page_classification():
 
     st.write('### Model Accuracy')
     st.write('''
-    |                        | KNN       | GaussianNB  | Decision Tree | Random Forest | SVC      |
-    | ---------------------- | ----------| ------------| ------------- | ------------- | -------- |
-    | Test Set Accuracy      | 0.94309   | 0.95122     | 0.95935       | 0.95935       | 0.78049  |
+        |                        | KNN       | GaussianNB  | Decision Tree | Random Forest | SVC      |
+        | ---------------------- | ----------| ------------| ------------- | ------------- | -------- |
+        | Test Set Accuracy      | 0.94309   | 0.95122     | 0.95935       | 0.95935       | 0.78049  |
     ''')
+
+    st.write('')
+    st.write('')
 
     st.write('### Confusion Matrix')
     im = Image.open('images/DM_class_reg_confusionMatrix.png')
-    st.image(im,width=800, caption='Confusion Matrix')
+    st.image(im, caption='Confusion Matrix')
     im = Image.open('images/DM_class_reg_confusionMatrix2.png')
-    st.image(im,width=800, caption='Confusion Matrix')
+    st.image(im, caption='Confusion Matrix')
+
+    st.write('')
+    st.write('')
 
     st.write('### Precision & Recall')
     im = Image.open('images/DM_class_reg_ROC1.png')
-    st.image(im,width=800, caption='F1-Score')
+    st.image(im, caption='F1-Score')
     im = Image.open('images/DM_class_reg_ROC2.png')
-    st.image(im,width=800, caption='F1-Score')
+    st.image(im, caption='F1-Score')
 
 
 def page_time_series_regression():
@@ -527,7 +533,7 @@ def page_time_series_regression():
         ''')
     with col2:
         im = Image.open('images/LSTM_1.png')
-        st.image(im,width=500, caption='Actual and Predicted results for COVID-19 Cases')
+        st.image(im, width=500, caption='Actual and Predicted results for COVID-19 Cases')
 
     ### model 2
     st.subheader('Multivariate LSTM-based RNN')
@@ -555,7 +561,7 @@ def page_time_series_regression():
         ''')
     with col2:
         im = Image.open('images/LSTM_2.png')
-        st.image(im,width=500, caption='Using Heatmap for Feature Selection')
+        st.image(im, caption='Using Heatmap for Feature Selection')
 
 
     st.markdown('''
@@ -574,7 +580,7 @@ def page_time_series_regression():
     st.write('')
     
     im = Image.open('images/LSTM_3.png')
-    st.image(im,width=900, caption='Actual and Predicted results for COVID-19 Cases using Multivariate LSTMnet')
+    st.image(im, caption='Actual and Predicted results for COVID-19 Cases using Multivariate LSTMnet')
     
     st.write('---')
     st.subheader('Stationary Time-Series and Non-stationary Time-Series')
@@ -585,7 +591,7 @@ def page_time_series_regression():
     ''')
 
     im = Image.open('images/LSTM_5.png')
-    st.image(im,width=1000, caption='Stationary Time-Series and Non-stationary Time-Series')
+    st.image(im, caption='Stationary Time-Series and Non-stationary Time-Series')
 
     st.markdown('''
         References:
