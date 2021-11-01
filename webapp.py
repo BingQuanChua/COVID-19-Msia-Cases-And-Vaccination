@@ -61,7 +61,7 @@ def page_eda():
         im = Image.open('images/EDA01_2.png')
         col2.image(im, caption='Covid Cases Group By Vaccination Status')
         im = Image.open('images/EDA01_3.png')
-        st.image(im, caption='Covid Cases Group By Cluster Type')
+        col1.image(im, caption='Covid Cases Group By Cluster Type')
 
         st.write('Based on the observation, we can deduce that the population that are aged around 18-59, unvaccinated, and active in workfleids have the highest risk in getting covid-19.')
 
