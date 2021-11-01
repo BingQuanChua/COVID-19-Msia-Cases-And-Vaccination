@@ -229,7 +229,7 @@ def page_regression():
 
     st.write('''
     .\n\n
-    #### Conclution
+    #### Conclusion
     An interesting observation is that Random Forest and Decision Tree both perform better than SVR and Linear Regressor.
     We decude the reason behind is because both RF and DT supports non linearity better and the nature of the dataset is 
     non linear as well.
