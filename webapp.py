@@ -44,22 +44,7 @@ def page_dashboard():
                   title='Daily report COVID cases and cases recovered in Malaysia')
     st.plotly_chart(fig, use_container_width=True)
 
-<<<<<<< HEAD
     st.write('')
-=======
-    st.write('''Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. 
-    Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, 
-    pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, 
-    vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede 
-    mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. 
-    Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, 
-    feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies 
-    nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget 
-    condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, 
-    luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero 
-    venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris 
-    sit amet nibh. Donec sodales sagittis magna.''')
->>>>>>> f2be80f7506e657934404f02fa0a546d2f0aef76
     st.write('---')
 
     st.write('## **Select a Data Range**')
@@ -105,19 +90,12 @@ def page_clustering():
 
     df_map.cluster_cases = df_map.cluster_cases.astype('string')
     df_map.cluster_deaths = df_map.cluster_deaths.astype('string')
-<<<<<<< HEAD
     
     cluster = st.selectbox('Clustering based on:', ['Daily COVID-19 Cases', 'Daily Number of Deaths'])
-=======
-
-    cluster = st.selectbox("Clustering based on:", [
-                           'Daily COVID-19 Cases', 'Daily Number of Deaths'])
->>>>>>> f2be80f7506e657934404f02fa0a546d2f0aef76
 
     if cluster == 'Daily COVID-19 Cases':
         cluster_attr = 'cluster_cases'
     else:
-<<<<<<< HEAD
         cluster_attr='cluster_deaths'
     
     fig = px.scatter_mapbox(df_map, lat="lat", lon="lon", hover_name='state', 
@@ -131,19 +109,6 @@ def page_clustering():
         title=f"Clustering Malaysia states based on {cluster}",
         category_orders={cluster_attr: ['0', '1', '2']}
     )
-=======
-        cluster_attr = 'cluster_deaths'
-
-    fig = px.scatter_mapbox(df_map, lat="lat", lon="lon", hover_name='state',
-                            hover_data=["population"], color=cluster_attr,
-                            center={
-                                'lat': 4.0,
-                                'lon': 108.25
-                            },
-                            zoom=4.8, height=600,
-                            mapbox_style="carto-darkmatter",
-                            title=f"Clustering Malaysia states based on {cluster}")
->>>>>>> f2be80f7506e657934404f02fa0a546d2f0aef76
 
     st.plotly_chart(fig, use_container_width=True)
 
@@ -159,7 +124,6 @@ def page_clustering():
             im = Image.open('images/CTR_2.png')
             st.image(im,width=600, caption='Dividing each states into different clusters according to deaths')
 
-<<<<<<< HEAD
     with col2:
         st.subheader('States and their clusters')
         st.write(df_map[['state', cluster_attr]])
@@ -191,9 +155,6 @@ def page_clustering():
 
     with st.beta_expander('Tips'):
         st.write('Select clustering based on a differnt parameter above to get more results.')
-=======
-def page_regression():
->>>>>>> f2be80f7506e657934404f02fa0a546d2f0aef76
 
     st.title('📈Regression Models')
     st.write('''In short, this section explains how we use historical cases data (data from past 7 days) to predict cases 
