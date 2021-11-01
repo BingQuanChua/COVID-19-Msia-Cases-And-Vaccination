@@ -21,10 +21,10 @@ def main():
     # Sidebar
     st.sidebar.header("Malaysia COVID-19 Cases and Vaccination")
     st.sidebar.header("🧭Navigation")
-    choice = st.sidebar.radio("go to", ('Dashboard', 'Clustering Analysis',
+    choice = st.sidebar.radio("go to", ('Exploratory Data Analaysis', 'Clustering Analysis',
                               'Regression', 'Classification', 'Time-Series Regression'), index=0)
 
-    if choice == 'Dashboard':
+    if choice == 'Exploratory Data Analaysis':
         page_dashboard()
     elif choice == 'Clustering Analysis':
         page_clustering()
@@ -44,18 +44,7 @@ def page_dashboard():
                   title='Daily report COVID cases and cases recovered in Malaysia')
     st.plotly_chart(fig, use_container_width=True)
 
-    st.write('''Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. 
-    Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, 
-    pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, 
-    vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede 
-    mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. 
-    Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, 
-    feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies 
-    nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget 
-    condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, 
-    luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero 
-    venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris 
-    sit amet nibh. Donec sodales sagittis magna.''')
+    st.write('')
     st.write('---')
 
     st.write('## **Select a Data Range**')
@@ -74,7 +63,7 @@ def page_dashboard():
         if len(filtered_cases_malaysia) == 0:
             st.error('No available data! Please select another set of date range.')
         else:
-            col1, col2 = st.beta_columns(2)
+            col1, col2 = st.columns(2)
 
             with col1:
                 st.write('## **Data Frame**')
@@ -91,32 +80,83 @@ def page_clustering():
 
     st.title('🧩Clustering Analysis')
     st.write('## **How well does each state handle COVID-19 cases based on past COVID-19 cases and deaths records?**')
+    st.markdown('''
+        To evaluate how well each state handles COVID-19 cases, we would like to perform time-series clustering to divide each state into different clusters based on their daily cases and deaths to analyze or discover the pattern or characteristics of each state. Time series k mean from `tslearn` library will be used to perform time-series clustering. 
+        
+        Before we start clustering the states, the number of daily cases and deaths of each state have been normalized by their state’s population and 3 clusters have been chosen (refer to our code for more) for the time series k means.
+
+        Select a parameter for clustering:
+    ''')
 
     df_map.cluster_cases = df_map.cluster_cases.astype('string')
     df_map.cluster_deaths = df_map.cluster_deaths.astype('string')
-
-    cluster = st.selectbox("Clustering based on:", [
-                           'Daily COVID-19 Cases', 'Daily Number of Deaths'])
+    
+    cluster = st.selectbox('Clustering based on:', ['Daily COVID-19 Cases', 'Daily Number of Deaths'])
 
     if cluster == 'Daily COVID-19 Cases':
         cluster_attr = 'cluster_cases'
     else:
-        cluster_attr = 'cluster_deaths'
-
-    fig = px.scatter_mapbox(df_map, lat="lat", lon="lon", hover_name='state',
-                            hover_data=["population"], color=cluster_attr,
-                            center={
-                                'lat': 4.0,
-                                'lon': 108.25
-                            },
-                            zoom=4.8, height=600,
-                            mapbox_style="carto-darkmatter",
-                            title=f"Clustering Malaysia states based on {cluster}")
+        cluster_attr='cluster_deaths'
+    
+    fig = px.scatter_mapbox(df_map, lat="lat", lon="lon", hover_name='state', 
+        hover_data=["population"], color=cluster_attr,
+        center={
+            'lat': 4.0,
+            'lon': 108.25
+        }, 
+        zoom=4.8, height=600,
+        mapbox_style="carto-darkmatter",
+        title=f"Clustering Malaysia states based on {cluster}",
+        category_orders={cluster_attr: ['0', '1', '2']}
+    )
 
     st.plotly_chart(fig, use_container_width=True)
-    st.write(df_map)
 
+    col1, col2 = st.columns([2, 1])
+    with col1:
+        
+        if cluster == 'Daily COVID-19 Cases':
+            st.subheader('Clustering each states into 3 clusters according to daily cases')
+            im = Image.open('images/CTR_1.png')
+            st.image(im,width=600, caption='Dividing each states into different clusters according to cases')
+        else:
+            st.subheader('Clustering each states into 3 clusters according to daily deaths')
+            im = Image.open('images/CTR_2.png')
+            st.image(im,width=600, caption='Dividing each states into different clusters according to deaths')
 
+    with col2:
+        st.subheader('States and their clusters')
+        st.write(df_map[['state', cluster_attr]])
+
+    st.write('') 
+    st.write('')
+    st.write('')
+    
+    if cluster == 'Daily COVID-19 Cases':
+        st.markdown('''
+            The figure above shows the results of clustering according to the daily_cases. There is 1 state cluster as red clusters. Which is Labuan. The trends of daily cases slightly increase between 2020 October to 2021 March and significantly increase when 2021 June. In 2021 July, the cases start decreasing.  
+
+            Next, there are 4 states as green clusters. Which are Kuala Lumpur, Melaka, Selangor and Negeri Sembilan. The cases of these states are quite stable until 2021 Jun, the cases start increasing until 2021 July, then cases decrease. 
+
+            Lastly, 11 states are red clusters. The trends of cases for these states are also similar to states as green clusters, but the number of cases increases a little bit higher than states in green clusters.
+
+            According to the result of clustering, except Labuan, before June 2021, each of the state's daily cases could be considered stable, most of the states were able to control the daily cases well. But in  June 2021, the cases for each state kept increasing, especially Labuan, whose cases have significantly increased if compared with other states. We can consider that during that period, Labuan was out of control in daily cases. But fortunately, after only about 1 month, Labuan cases have been under control, the cases start decreasing and during that period, other states' daily cases still keep increasing until September then start decreasing. In conclusion, some investigation on Labuan in handling covid cases should be considered especially in Jun 2021 since that time performs a very significant increase of cases which can’t be observed in other states. Besides, states in green clusters and states in red clusters have similar patterns but states in green clusters cases are less than the states in red clusters, which may handle the daily cases better if compared with those states in red or red clusters.
+        ''')
+    else:
+        st.markdown('''
+            The figure above shows the states clustering based on daily deaths cases. As we can see there is one state as a red cluster. The deaths slightly increase from September 2020 to March 2021 and a significant increase in deaths cases in June 2021. Besides, there are four states as green clusters, which are Kuala Lumpur, Melaka, Selangor, and Negeri Sembilan again. The death cases in green clusters keep increasing more rapidly if compared with states in blue clusters from June to September 2021. Furthermore, states in blue clusters perform more stable trends of death cases if compared with another two clusters. 
+
+            According to this figure, we can conclude that Labuan is not doing well in handling covid cases. In both figures, it performed a very significant increase in June 2021, and from November to March 2021, it also slightly increased its death cases but other states didn’t have the same problems. For states in the blue cluster, although their daily cases are slightly higher than states in the green cluster, their death cases are much more stable if compared with states in the green cluster. So, states in the blue cluster perform better in handling covid cases and problems.       
+        ''')
+
+    st.write('') 
+    st.write('')
+    st.write('')
+
+    with st.beta_expander('Tips'):
+        st.write('Select clustering based on a differnt parameter above to get more results.')
+
+        
 def page_regression():
 
     st.title('📈Regression Models')
@@ -242,7 +282,7 @@ def page_time_series_regression():
     
     ### model 1
     st.subheader('LSTM-based RNN')
-    col1, col2 = st.beta_columns(2)
+    col1, col2 = st.columns(2)
     with col1:
         st.markdown('''
             The first time-series regression model is a single variate LSTM-based RNN model. The number of daily cases is separated into a train and test set on 2021-07-01. The training set has a total of 523 days and the test set has a total of 97 days.
@@ -262,12 +302,12 @@ def page_time_series_regression():
     st.markdown('''
         Our second time-series regression model is a multivariate LSTM-based regression. We have plenty of datasets that might have an impact on the number of daily COVID-19 cases. These datasets are cases_malaysia, test_malaysia, deaths_malaysia, checkin_malaysia, vax_malaysia, and vaxreg_malaysia which records the cases, tests, deaths, check-ins, vaccination and registration data in Malaysia.
 
-        A simple feature selection was used to retrieve the attributes with higher correlation to the number of daily cases. We have generated heatmaps to visualize the correlationship of each attribute with cases_new (daily COVID cases). Before that, we will be merging a few datasets together. Since tests_malaysia, deaths_malaysia, and checkin_malaysia have a similar time range, we will merge them together along with cases_malaysia. On the other hand, vax_malaysia and vaxreg_malaysia have a relatively shorter time range. Hence, we will merge them with the cases_new column separately in another DataFrame.
+        A simple feature selection was used to retrieve the attributes with higher correlation to the number of daily cases. We have generated heatmaps to visualize the correlationship of each attribute with `cases_new` (daily COVID cases). Before that, we will be merging a few datasets together. Since tests_malaysia, deaths_malaysia, and checkin_malaysia have a similar time range, we will merge them together along with cases_malaysia. On the other hand, vax_malaysia and vaxreg_malaysia have a relatively shorter time range. Hence, we will merge them with the `cases_new` column separately in another DataFrame.
 
-        After observing the correlationship between cases_new and other attributes from various datasets (cases_malaysia, tests_malaysia, deaths_malaysia, checkin_malaysia, vax_malaysia and vaxreg_malaysia). We found that the features with higher correlation (>= 0.9 positively or negatively) are:
+        After observing the correlationship between `cases_new` and other attributes from various datasets (cases_malaysia, tests_malaysia, deaths_malaysia, checkin_malaysia, vax_malaysia and vaxreg_malaysia). We found that the features with higher correlation (>= 0.9 positively or negatively) are:
     ''')
 
-    col1, col2 = st.beta_columns([1,2])
+    col1, col2 = st.columns([1,2])
     with col1:
         st.markdown('''
             `cases_recovered`,  
@@ -300,12 +340,6 @@ def page_time_series_regression():
     st.write('') 
     st.write('')
     st.write('')
-
-    # col1, col2 = st.beta_columns(2)
-    # with col1:
-    #     st.write('**Heatmap**')
-    # with col2:
-    #     st.write('**Lineplot**')
     
     im = Image.open('images/LSTM_3.png')
     st.image(im,width=900, caption='Actual and Predicted results for COVID-19 Cases using Multivariate LSTMnet')
