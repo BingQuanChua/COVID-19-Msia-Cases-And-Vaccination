@@ -198,7 +198,38 @@ def page_regression():
 def page_classification():
 
     st.title('📊Classification')
-    st.write('Hello')
+    st.write('''
+    This is the continuation of Regression usign similar [dataset](#data-preprocessing). A gentle reminder, do visit 
+    regression page before diving into this classification section.
+    ''')
+
+    st.write('''
+    ### Classification Models
+
+    Classification models that will be used:\n
+    1. K-Nearest Neighbors Classifier
+    2. Naive Bayes Classifier
+    3. Decision Tree Classifier
+    4. Random Forest Classifier
+
+    Performance evaluation metrics that will be used:\n
+    1. Confusion Matrix
+    2. Precision, Recall, F1-score
+    3. ROC Curve
+    ''')
+
+    st.write('### Model Accuracy')
+    st.write('''
+    |                        | KNN       | GaussianNB  | Decision Tree | Random Forest | SVC      |
+    | ---------------------- | ----------| ------------| ------------- | ------------- | -------- |
+    | Test Set Accuracy      | 0.94309   | 0.95122     | 0.95935       | 0.95935       | 0.78049  |
+    ''')
+
+    st.write('### Confusion Matrix')
+    im = Image.open('images/DM_class_reg_confusionMatrix.png')
+    st.image(im,width=800, caption='Confusion Matrix')
+    im = Image.open('images/DM_class_reg_confusionMatrix2.png')
+    st.image(im,width=800, caption='Confusion Matrix')
 
 
 def page_time_series_regression():
