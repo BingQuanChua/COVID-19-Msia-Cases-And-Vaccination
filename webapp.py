@@ -2,11 +2,10 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 import altair as alt
-from streamlit_folium import folium_static
-import folium
 import pickle
 import plotly.express as px
 from datetime import datetime, date
+from PIL import Image
 
 # read df from pickle files
 cases_malaysia = pickle.load(open('pickle_files/cases_malaysia.pkl', 'rb'))
@@ -19,6 +18,7 @@ st.set_page_config(layout="wide")
 def main():
 
     # Sidebar
+    st.sidebar.header("Malaysia COVID-19 Cases and Vaccination")
     st.sidebar.header("🧭Navigation")
     choice = st.sidebar.radio("go to", ('Dashboard', 'Clustering Analysis', 'Regression', 'Classification', 'Time-Series Regression'), index=0)
 
@@ -107,12 +107,12 @@ def page_clustering():
 
 def page_regression():
 
-    st.title('📈Regression Models')
+    st.title('📈Regression')
     st.write('Hello')
 
 def page_classification():
 
-    st.title('📊Classification Models')
+    st.title('📊Classification')
     st.write('Hello')
 
 def page_time_series_regression():
@@ -120,11 +120,96 @@ def page_time_series_regression():
     st.title('⏳Time-Series Regression')
     st.write('## **Is it possible for the government to predict the number of daily new cases accurately based on past data in order to deploy appropriate movement control measures?**')
     st.markdown('''
+        With an accurate forecast of the daily new cases, the government would be able to control the vaccination rate to tackle the pandemic effectively. We have implemented a time-series regression to forecast the number of COVID-19 cases in Malaysia. Two LSTM-based RNN is built to aid us in this problem.
+    ''')
     
-    With an accurate forecast of the daily new cases, the government would be able to control the vaccination rate to tackle the pandemic effectively. We have implemented a time-series regression to forecast the number of COVID-19 cases in Malaysia. Two LSTM-based RNN is built to aid us in this problem.
+    ### model 1
+    st.subheader('LSTM-based RNN')
+    col1, col2 = st.beta_columns(2)
+    with col1:
+        st.markdown('''
+            The first time-series regression model is a single variate LSTM-based RNN model. The number of daily cases is separated into a train and test set on 2021-07-01. The training set has a total of 523 days and the test set has a total of 97 days.
+
+            A 5 layer LSTM-based RNN with a total of 71,051 trainable parameters has been implemented. Each layer apart from the dense layer has 50 units and a dropout rate of 0.2. After training the model, we used it to predict the test set. The model failed to predict the trend of the daily cases as shown below. The results have a root mean square error of 7740.403.
+
+            | Evaluation                    | LSTM-Based RNN |
+            | ----------------------------- | -------------- |
+            | Root Mean Square Error (RMSE) | 7740.403       |
+        ''')
+    with col2:
+        im = Image.open('images/LSTM_1.png')
+        st.image(im,width=500, caption='Actual and Predicted results for COVID-19 Cases')
+
+    ### model 2
+    st.subheader('Multivariate LSTM-based RNN')
+    st.markdown('''
+        Our second time-series regression model is a multivariate LSTM-based regression. We have plenty of datasets that might have an impact on the number of daily COVID-19 cases. These datasets are cases_malaysia, test_malaysia, deaths_malaysia, checkin_malaysia, vax_malaysia, and vaxreg_malaysia which records the cases, tests, deaths, check-ins, vaccination and registration data in Malaysia.
+
+        A simple feature selection was used to retrieve the attributes with higher correlation to the number of daily cases. We have generated heatmaps to visualize the correlationship of each attribute with cases_new (daily COVID cases). Before that, we will be merging a few datasets together. Since tests_malaysia, deaths_malaysia, and checkin_malaysia have a similar time range, we will merge them together along with cases_malaysia. On the other hand, vax_malaysia and vaxreg_malaysia have a relatively shorter time range. Hence, we will merge them with the cases_new column separately in another DataFrame.
+
+        After observing the correlationship between cases_new and other attributes from various datasets (cases_malaysia, tests_malaysia, deaths_malaysia, checkin_malaysia, vax_malaysia and vaxreg_malaysia). We found that the features with higher correlation (>= 0.9 positively or negatively) are:
+    ''')
+
+    col1, col2 = st.beta_columns([1,2])
+    with col1:
+        st.markdown('''
+            `cases_recovered`,  
+            `cases_active`,  
+            `cases_pvax`,  
+            `cases_child`,  
+            `cases_adolescent`,  
+            `cases_adult`,  
+            `cases_elderly`,  
+            `deaths_new`,  
+            `deaths_new_dod`, and  
+            `deaths_bid_dod`.
+        ''')
+    with col2:
+        im = Image.open('images/LSTM_2.png')
+        st.image(im,width=500, caption='Using Heatmap for Feature Selection')
+
+
+    st.markdown('''
+        The resulting dataset has 568 days of data. Similar to the above, we implemented a 5 layer LSTM-based RNN with a total of 73,051 trainable parameters. A lookback of 30 days is used to create our dataset, resulting in 538 days of data. We then get the last 50 days for prediction and the rest of the days for training and validation. The model came to an early stopping at 16 epoch after training and validation data were fed to it.
+
+        After the training, we test our model by predicting the test data. The results show that the model is able to capture the overall downward trend of the number of daily cases in Malaysia but failed to capture the ups and downs in the details. The model has a root mean square error of 1640.952, which is an improvement from the previous model.
+
+        | Evaluation                    | Multivariate LSTM-Based RNN |
+        | ----------------------------- | --------------------------- |
+        | Root Mean Square Error (RMSE) | 1640.952                    |
+
 
     ''')
-    st.subheader('LSTM-based RNN ')
+    st.write('') 
+    st.write('')
+    st.write('')
+
+    # col1, col2 = st.beta_columns(2)
+    # with col1:
+    #     st.write('**Heatmap**')
+    # with col2:
+    #     st.write('**Lineplot**')
+    
+    im = Image.open('images/LSTM_3.png')
+    st.image(im,width=900, caption='Actual and Predicted results for COVID-19 Cases using Multivariate LSTMnet')
+    
+    st.write('---')
+    st.subheader('Stationary Time-Series and Non-stationary Time-Series')
+    st.markdown('''
+        We learnt that time-series data can be categorized into stationary and non-stationary. Stationary time-series data tends to be more predictable as the mean and variance normally remains constant and does not possess any trends or seasonality. On the other hand, non-stationary data are considered harder to predict as it is the opposite of stationary data. Other time series regression models such as the ARIMA model perform better forecasts with stationary time-series data. 
+
+        The daily number of COVID-19 cases in Malaysia is a non-stationary time-series data, hence the prediction results are not accurate.    
+    ''')
+
+    im = Image.open('images/LSTM_5.png')
+    st.image(im,width=1000, caption='Stationary Time-Series and Non-stationary Time-Series')
+
+    st.markdown('''
+        References:
+
+        1. [Stationarity in Time Series Analysis Explained using Python](https://blog.quantinsti.com/stationarity/)
+        2. [Time Series Analysis using ARIMA and LSTM(in Python and Keras)](https://medium.com/analytics-vidhya/time-series-analysis-using-arima-and-lstm-in-python-and-keras-part1-f987e11f9f8c)    
+    ''')
 
 
 if __name__ == "__main__":
