@@ -7,10 +7,7 @@ import plotly.express as px
 from datetime import datetime, date
 from PIL import Image
 
-# read df from pickle files
-cases_malaysia = pickle.load(open('pickle_files/cases_malaysia.pkl', 'rb'))
-
-# read the Malaysia states geojson file
+# read the Malaysia states 
 df_map = pd.read_csv('map/map.csv')
 
 st.set_page_config(layout="wide")
@@ -44,50 +41,18 @@ def main():
         page_time_series_regression()
 
 
-def page_dashboard():
-
-    st.title("Malaysia COVID-19 Cases and Vaccination")
-    st.write("## **Daily Recorded Cases in Malaysia**")
-    fig = px.line(cases_malaysia, x='date', y=['cases_new', 'cases_recovered'],
-                  title='Daily report COVID cases and cases recovered in Malaysia')
-    st.plotly_chart(fig, use_container_width=True)
-
-    st.write('')
-    st.write('---')
-
-    st.write('## **Select a Data Range**')
-    st.write('The recorded data starts from `2020-01-25` to `2021-10-05`. Any dates selected out of this range will not be shown.')
-    cases_malaysia['date'] = cases_malaysia['date'].astype('datetime64[ns]')
-    date_range = st.date_input(
-        "Pick a date", (cases_malaysia.date.min(), cases_malaysia.date.max()))
-
-    if len(date_range) == 2:  # when 2 dates are selected
-        first_date = datetime.combine(date_range[0], datetime.min.time())
-        second_date = datetime.combine(date_range[1], datetime.min.time())
-
-        filtered_cases_malaysia = cases_malaysia[(
-            cases_malaysia['date'] >= first_date) & (cases_malaysia['date'] <= second_date)]
-
-        if len(filtered_cases_malaysia) == 0:
-            st.error('No available data! Please select another set of date range.')
-        else:
-            col1, col2 = st.columns(2)
-
-            with col1:
-                st.write('## **Data Frame**')
-                st.write(filtered_cases_malaysia)
-
-            with col2:
-                st.write('## **Same Bar Plot**')
-                fig = px.line(filtered_cases_malaysia, x='date', y=['cases_new', 'cases_recovered'],
-                              title='Daily report COVID cases and cases recovered in Malaysia')
-                st.plotly_chart(fig, use_container_width=True)
-
-
 def page_eda():
-    st.title('🔎Exploratory Data Analaysis')
 
-    with st.expander('EDA 1: Analyse which group of population are more vulnerable to covid cases in Malaysia.'):
+    st.title('🔎Exploratory Data Analaysis')
+    st.markdown('''
+        Our data was obtained from the Minister of Health (MoH) and COVID-19 Immunisation Task Force (CITF). Due to such large amount of data, a more than simple exploratory data analysis must be done. We came up with a set of questions to help us understand the data more.
+        
+        Note: Basic data cleaning and pre-processing was done in a separate Jupyter notebook. 
+    ''')
+    isExpand = st.checkbox('Expand all questions')
+    
+
+    with st.expander('EDA 1: Analyse which group of population are more vulnerable to covid cases in Malaysia.', expanded=isExpand):
         st.subheader('Which group of population are more vulnerable to covid cases in Malaysia.')
 
         im = Image.open('images/EDA01_1.png')
@@ -99,7 +64,7 @@ def page_eda():
 
         st.write('Based on the observation, we can deduce that the population that are aged around 18-59, unvaccinated, and active in workfleids have the highest risk in getting covid-19.')
 
-    with st.expander('EDA 2: Analyse how covid cases vary across time dimensions at different granularity.'):
+    with st.expander('EDA 2: Analyse how covid cases vary across time dimensions at different granularity.', expanded=isExpand):
         st.subheader('How covid cases vary across time dimensions at different granularity.')
         
         im = Image.open('images/EDA02_1.png')
@@ -118,7 +83,7 @@ def page_eda():
         st.image(im, caption='Covid Cases Over Month 2021')
         st.write('Same oberservation based on week number, the cases tend to spike when it nears 3rd or 4th quater of the year. But beware the the relative scale of 2020 is not the same as 2021')
         
-    with st.expander('EDA 3: What is the stationarity of the time-series dataset?'):
+    with st.expander('EDA 3: What is the stationarity of the time-series dataset?', expanded=isExpand):
         st.subheader('What is the stationarity of the time-series dataset?')
 
         st.write('''In Econometrics, a stationary time series is one whose properties do not depend on the time at which the series is observed. Thus, time series with trends, or with seasonality,
@@ -195,15 +160,65 @@ def page_eda():
 
         Null hypothesis accepted, time series has non-stationarity
         ''')
-        
 
-    st.subheader('EDA 4: What are the vaccination and registration rates per state in Malaysia?')
 
-    st.subheader('EDA 5: What are the types and total number of side effects for each type of vaccine?')
+    with st.expander('EDA 4 - What are the vaccination and registration rates per state in Malaysia?', expanded=isExpand):
+        st.subheader('What are the vaccination and registration rates per state in Malaysia?')
+        col1, col2 = st.columns(2)
+        with col1:
+            im = Image.open('images/EDA04_1.png')
+            st.image(im, caption='Vaccination percentage of each state')
+        with col2:
+            im = Image.open('images/EDA04_2.png')
+            st.image(im, caption='Vaccination registration percentage of each state')
 
-    st.subheader('EDA 6: Which type of vaccine is given to more people?')
+        st.markdown('''
+            The figures above show the vaccination rate and vaccine registration rate per state. The figure on the left side is the vaccination rate and the right side is the vaccine registration rate for each state. According to the figures above, we could find some of the states have vaccination rates or vaccine registration rates that are larger than 100%, for example like Kuala Lumpur. For these situations, we consider foreigners' information may also be included in the dataset. 
+            
+            If we exclude those states over 100% of the rate, we found no states have achieved 80% of vaccination rate, Negeri Sembilan has the highest vaccination rate which is about 70%. But, for Sabah and Kelantan, their vaccination rate is still below or about 50% of the vaccination rate, which could be considered a low vaccination rate if compared with other states, and also the vaccine registration rate for Sabah and Kelantan are also low if compared with other states. 
+            
+            The government should pay attention to this situation to enhance their vaccination and registration rate to make sure each state could achieve the required vaccination rate to prevent the spread of the Covid virus.
+        ''')
 
-    with st.expander('EDA 7 - Which states are recovering? Which of the states shows a decrease in the number of COVID-19 cases?'):
+
+    with st.expander('EDA 5 - What are the types and total number of side effects for each type of vaccine?', expanded=isExpand): 
+        st.subheader('What are the types and total number of side effects for each type of vaccine?')
+        col1, col2 = st.columns([1, 2])
+        with col1:
+            st.markdown('''
+                The figure on the left the total number of different side effects in dose 1 and dose 2 for each type of vaccine. According to the figure above, we could find the number of different types of side effects in dose one is significantly greater than the side effects in dose 2 for each type of vaccine above. Besides, we also found site pain, tiredness and headache are the most common side effects in each type of vaccine. To be aware, the dataset didn’t record any total amount of side effects for Cansino, so we can’t observe the information of side effects for Cansino.
+            ''')
+        with col2:
+            im = Image.open('images/EDA05_2.png')
+            st.image(im, caption='Barplot shows different types of side effects from each type of vaccine')
+
+        st.write('')
+        st.write('')
+        st.write('')
+
+        col3, col4 = st.columns([1, 2])
+        with col3:
+            st.markdown('''
+                The next figure below also shows the number of serious side effects for each type of vaccine. No information regarding Cansino was recorded in the dataset. As we can see, actual facial paralysis is the largest number of serious side effects that exist in each type of vaccine. For Pfizer and Sinovac, suspected anaphylaxis is the second large number of serious side effects. 
+            ''')
+        with col4:
+            im = Image.open('images/EDA05_3.png')
+            st.image(im, caption='Barplot shows different types of serious side effects from each type of vaccine')
+
+
+    with st.expander('EDA 6 - Which type of vaccine is given to more people?', expanded=isExpand):
+        st.subheader('Which type of vaccine is given to more people?')
+        col1, col2 = st.columns([2, 1])
+        with col1:
+            st.markdown('''
+                The figure shows the ratio of each type of vaccine that is obtained by Malaysian residents.  As we can see, Pfizer is the major vaccine that is available in Malaysia, currently, a total of 51.43% of residents in Malaysia obtained Pfizer. In Addition, a total of 39.67% of residents obtained Sinovac, which is the second-largest amount of vaccine provided to Malaysian residents, followed by Astrazena and Cansino. Cansino is the smallest amount of vaccine obtained in Malaysia, currently, only 0.44% of Malaysia residents obtained Cansino.
+            ''')
+        with col2:
+            im = Image.open('images/EDA06_1.png')
+            st.image(im, caption='Pie Chart showing ratio of different types of vaccine given to Malaysians')
+
+
+    with st.expander('EDA 7 - Which states are recovering? Which of the states shows a decrease in the number of COVID-19 cases?', expanded=isExpand):
         st.subheader('Which states are recovering? Which of the states shows a decrease in the number of COVID-19 cases?')
         st.markdown('''
             Since the number of vaccinated entities are increasing, there is a significant decrease in the number of COVID-19 cases in each state. By plotting the moving average of daily confirmed cases and the cumulative number of vaccinated persons against the dates, we can observe that there is a downward trend after the vaccination has reached a certain level in each of the states. The moving average of daily cases is obtained by averaging the number of daily cases in the past 7 days. 
@@ -224,7 +239,7 @@ def page_eda():
         st.write('It is observed that the number of vaccinated people in some states has exceeded their state population. The two states that have this phenomena are Kuala Lumpur and Putrajaya. This might be due to foreigners receiving their vaccination shot in our country.')
 
 
-    with st.expander('EDA 8 - When is the time of the day with most MySejahtera check-ins?'):
+    with st.expander('EDA 8 - When is the time of the day with most MySejahtera check-ins?', expanded=isExpand):
         st.subheader('When is the time of the day with most MySejahtera check-ins?')
         st.markdown('''
             checkin_malaysia_time.csv records the time distribution of daily check-ins on MySejahtera at the country level. The data records the number of check-ins nationwide in every 30 minutes interval.
@@ -236,7 +251,7 @@ def page_eda():
         st.write('From the plot above, we can roughly observe 3 peaks, which are around 8am, 12pm, and 6pm respectively. Presumably these are the preferred hours for Malaysians to buy their meals.')
 
 
-    with st.expander('EDA 9 - What are the dates with the highest number of checkins? How does it correlate with the number of cases and deaths during the day?'):
+    with st.expander('EDA 9 - What are the dates with the highest number of checkins? How does it correlate with the number of cases and deaths during the day?', expanded=isExpand):
         st.subheader('What are the dates with the highest number of checkins? How does it correlate with the number of cases and deaths during the day?')
         im = Image.open('images/EDA09_1.png')
         st.image(im, caption='Daily number of confirmed cases, deaths, and check-ins')
@@ -255,7 +270,7 @@ def page_eda():
             st.image(im, caption='Correlation heatmap')
 
 
-    with st.expander('EDA 10 - Rate of Serious Vaccine Side Effect  VS Covid Death Rate without obtaining vaccine, which one is more dangerous?'):
+    with st.expander('EDA 10 - Rate of Serious Vaccine Side Effect  VS Covid Death Rate without obtaining vaccine, which one is more dangerous?', expanded=isExpand):
         st.subheader('Rate of Serious Vaccine Side Effect  VS Covid Death Rate without obtaining vaccine, which one is more dangerous?')
         st.markdown('''
             Some people refuse to obtain vaccines because they think vaccines are dangerous and high risk. In this question, we will measure the rate of serious side effects of vaccination and covid death rate if without obtaining a vaccine to evaluate whether reducing it is a good choice or not. 
@@ -353,7 +368,7 @@ def page_clustering():
     st.write('')
     st.write('')
 
-    with st.beta_expander('Tips'):
+    with st.expander('Tips'):
         st.write('Select clustering based on a differnt parameter above to get more results.')
 
         
@@ -386,13 +401,13 @@ def page_regression():
     col2.image(im2,width=400, caption='Sample bin median')
 
     st.write('### Feature Importance')
-    col1, col2, col3 = st.columns(3)
+    col1, col2 = st.columns([8, 9])
     im = Image.open('images/DM_class_reg_heatmap.png')
     col1.image(im,width=500, caption='Heatmap for All Features')
     im = Image.open('images/DM_class_reg_SHAP1.png')
-    col2.image(im,width=500, caption='Heatmap for All Features')
+    col2.image(im,width=500, caption='SHAP values of each features')
     im = Image.open('images/DM_class_reg_SHAP2.png')
-    col3.image(im,width=500, caption='Heatmap for All Features')
+    col2.image(im,width=500, caption='SHAP values of each features 2')
 
     st.markdown('''
     #### Regression Models
@@ -427,8 +442,10 @@ def page_regression():
     | Root Mean Square Error (RMSE) | 0.47043           | 0.20162       | 0.14114       | 0.48661   |
     ''')
 
+    st.write('')
+    st.write('')
+
     st.write('''
-    .\n\n
     #### Conclusion
     An interesting observation is that Random Forest and Decision Tree both perform better than SVR and Linear Regressor.
     We decude the reason behind is because both RF and DT supports non linearity better and the nature of the dataset is 
