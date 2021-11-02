@@ -45,25 +45,24 @@ Data taken as of **`6-10-2021`** (cut off date)
 
 
 
-## 💻 Deployment
+## 🐱‍💻Deployment
 
 Our results are deployed to Heroku using in the form of a Streamlit webapp.
 
-Check out the page! https://covid-19-msia-cases-and-vax.herokuapp.com/
-
+Check out our page! https://covid-19-msia-cases-and-vax.herokuapp.com/
 
 
 Screenshots:
 
 <img src="images/page_navigation.gif">
 
-<p style="text-align: center;"> Fig.1 Navigation </p>
+<p align="center"> Fig.1 Navigation </p>
 
 ---
 
 <img src="images/page_showcase.gif">
 
-<p style="text-align: center;"> Fig.2 Clustering Analysis </p>
+<p align="center"> Fig.2 Clustering Analysis </p>
 
 
 
