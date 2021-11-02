@@ -2,64 +2,70 @@
 
 An in-depth extension of our previous [Assignment](https://github.com/BingQuanChua/COVID-19-Msia-Mining).
 
-Our work must consist of 
-- ~~1️⃣ association rule mining algorithm,~~ => change to :one: of the below
-- at least 2️⃣ classification models, 
-- at least 2️⃣ regression models, and 
-- 1️⃣ clustering technique.
 
-We must provide visualization to your findings and analyze them accordingly.
 
 ## 📚Datasets	
 
-Data taken as of **`6-10-2021`**
+Data taken as of **`6-10-2021`** (cut off date)
 
-Covid-19 Open Data:
-https://github.com/MoH-Malaysia/covid19-public
+1. COVID-19 Open Data from the Minister of Health (MoH)
+   https://github.com/MoH-Malaysia/covid19-public
 
-Vaccination Data:
-https://github.com/CITF-Malaysia/citf-public
+2. Vaccination Data from COVID-19 Immunisation Task Force (CITF)
+   https://github.com/CITF-Malaysia/citf-public
 
-❌ datasets that are not in use: `clusters.csv`, `hospital.csv`, `icu.csv`, `pkrc.csv`
 
-## 📋To-Do List
 
-Exploratory Data Analysis
+## 📖Table of Contents
 
-- [ ] A little bit more
+### **Exploratory Data Analysis**
 
-Data Mining Questions
+* Analyse which group of population are more vulnerable to COVID cases in Malaysia.
+* Analyse how COVID cases vary across time dimensions at different granularity.
+* What is the stationarity of the time-series dataset?
+* What are the vaccination and registration rates per state in Malaysia?
+* What are the types and total number of side effects for each type of vaccine?
+* Which type of vaccine is given to more people?
+* Which states are recovering? Which of the states shows a decrease in the number of COVID-19 cases?
+* When is the time of the day with most MySejahtera check-ins?
+* What are the dates with the highest number of checkins? How does it correlate with the number of cases and deaths during the day?
+* Rate of Serious Vaccine Side Effect VS COVID Death Rate without obtaining vaccine, which one is more dangerous?
 
-- [ ] Clustering Analysis 
-- [ ] Time Series Regression
-- [ ] Time Series Regression 2
-- [ ] Classification
+### **Clustering Analysis**  
 
-Deployment
+* How well does each state handle COVID-19 cases based on past COVID-19 cases and deaths records?
 
-- [ ] Streamlit webapp
+### **Regression and Classification** 
 
-Project report
+* By utilizing the previous COVID-19 records, is it possible to construct a model capable of predicting/classifying the number of cases for the upcoming day or week?
 
-- [ ] Report typed in LaTeX
+### **Time-series Regression**
 
-## ❓Questions
+* Is it possible for the government to predict the number of daily new cases accurately based on past data in order to deploy appropriate movement control measures?
 
-**Clustering**
-* Access how well does each state handle covid cases based on pass covid records (cases, population, test)
-Suggested methods: time-series clustering.
-PIC: Ryan
 
-**Regression**
-* In order to deploy appropriate movement control measures, how can the government accurately predict of weely new cases based on past data?
-* Predict the vaccination rate based on past data?
-Suggested methods: LSTMNet, ARIMA
-PIC: Bing
 
-**Classification**
-* By using previous 3, 5, 7 days covid records, come out with a model that can classify next day / week’s cases.
-Suggested methods: dunno
-PIC: KY
+## 💻 Deployment
+
+Our results are deployed to Heroku using in the form of a Streamlit webapp.
+
+Check out the page! https://covid-19-msia-cases-and-vax.herokuapp.com/
+
+
+
+Screenshots:
+
+<img src="images/page_navigation.gif">
+
+<p style="text-align: center;"> Fig.1 Navigation </p>
+
+---
+
+<img src="images/page_showcase.gif">
+
+<p style="text-align: center;"> Fig.2 Clustering Analysis </p>
+
+
 
 ## 📑References
 

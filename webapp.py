@@ -52,39 +52,39 @@ def page_eda():
     isExpand = st.checkbox('Expand all questions')
     
 
-    with st.expander('EDA 1: Analyse which group of population are more vulnerable to covid cases in Malaysia.', expanded=isExpand):
-        st.subheader('Which group of population are more vulnerable to covid cases in Malaysia.')
+    with st.expander('EDA 1: Analyse which group of population are more vulnerable to COVID cases in Malaysia.', expanded=isExpand):
+        st.subheader('Which group of population are more vulnerable to COVID cases in Malaysia.')
 
         col1, col2 = st.columns((5,5))
         im = Image.open('images/EDA01_1.png')
-        col1.image(im, caption='Covid Cases Group By Age')
+        col1.image(im, caption='COVID Cases Group By Age')
         im = Image.open('images/EDA01_2.png')
-        col2.image(im, caption='Covid Cases Group By Vaccination Status')
+        col2.image(im, caption='COVID Cases Group By Vaccination Status')
         im = Image.open('images/EDA01_3.png')
-        col1.image(im, caption='Covid Cases Group By Cluster Type')
+        col1.image(im, caption='COVID Cases Group By Cluster Type')
 
         st.write('Based on the observation, we can deduce that the population that are aged around 18-59, unvaccinated, and active in workfleids have the highest risk in getting covid-19.')
 
 
-    with st.expander('EDA 2: Analyse how covid cases vary across time dimensions at different granularity.', expanded=isExpand):
-        st.subheader('How covid cases vary across time dimensions at different granularity.')
+    with st.expander('EDA 2: Analyse how COVID cases vary across time dimensions at different granularity.', expanded=isExpand):
+        st.subheader('How COVID cases vary across time dimensions at different granularity.')
         
         im = Image.open('images/EDA02_1.png')
-        st.image(im, caption='Covid Cases Over Weekday')
-        st.write('There is no clear indication showing that any particular day have more covid cases')
+        st.image(im, caption='COVID Cases Over Weekday')
+        st.write('There is no clear indication showing that any particular day have more COVID cases')
 
         col1, col2 = st.columns((5,5))
         im = Image.open('images/EDA02_2.png')
-        col1.image(im, caption='Covid Cases Over Week Number 2020')
+        col1.image(im, caption='COVID Cases Over Week Number 2020')
         im = Image.open('images/EDA02_3.png')
-        col2.image(im, caption='Covid Cases Over Week Number 2021')
+        col2.image(im, caption='COVID Cases Over Week Number 2021')
         st.write('The cases tend to spike when it nears the end of the year (shown in both weeks and months). However, do not compare 2020 with 2021 because 2020 has a relatively smaller y range.')
 
         col1, col2 = st.columns((5,5))
         im = Image.open('images/EDA02_4.png')
-        col1.image(im, caption='Covid Cases Over Month 2020')
+        col1.image(im, caption='COVID Cases Over Month 2020')
         im = Image.open('images/EDA02_5.png')
-        col2.image(im, caption='Covid Cases Over Month 2021')
+        col2.image(im, caption='COVID Cases Over Month 2021')
         st.write('Same oberservation based on week number, the cases tend to spike when it nears 3rd or 4th quater of the year. But beware the the relative scale of 2020 is not the same as 2021')
         
     
@@ -95,13 +95,13 @@ def page_eda():
          are not stationary — the trend and seasonality will affect the value of the time series at different times. In order to identify the stationarity of the time series, we use Dickey Fuller test''')
 
         EDA3 = st.selectbox('Check Stationarity Of:', \
-        ['Covid Cases', 'Covid Deaths', 'Cluster Tracing', 'MySejahtera Checkins'])
+        ['COVID Cases', 'COVID Deaths', 'Cluster Tracing', 'MySejahtera Checkins'])
 
-        if EDA3 == 'Covid Cases':
+        if EDA3 == 'COVID Cases':
             im = Image.open('images/EDA03_1.png')
-            st.image(im, caption='Covid Cases')
+            st.image(im, caption='COVID Cases')
             st.markdown('''
-            Reuslts of Dickey-Fuller Test for Covid Cases:
+            Reuslts of Dickey-Fuller Test for COVID Cases:
 
             | Test                           | Reuslts   |
             | ------------------------------ | ----------|
@@ -116,11 +116,11 @@ def page_eda():
             Null hypothesis accepted, time series has non-stationarity
             ''')
 
-        elif EDA3 == 'Covid Deaths':
+        elif EDA3 == 'COVID Deaths':
             im = Image.open('images/EDA03_3.png')
-            st.image(im, caption='Covid Deaths')
+            st.image(im, caption='COVID Deaths')
             st.markdown('''
-            Reuslts of Dickey-Fuller Test for Covid Deaths:
+            Reuslts of Dickey-Fuller Test for COVID Deaths:
 
             | Test                           | Reuslts   |
             | ------------------------------ | ----------|
@@ -188,7 +188,7 @@ def page_eda():
             
             If we exclude those states over 100% of the rate, we found no states have achieved 80% of vaccination rate, Negeri Sembilan has the highest vaccination rate which is about 70%. But, for Sabah and Kelantan, their vaccination rate is still below or about 50% of the vaccination rate, which could be considered a low vaccination rate if compared with other states, and also the vaccine registration rate for Sabah and Kelantan are also low if compared with other states. 
             
-            The government should pay attention to this situation to enhance their vaccination and registration rate to make sure each state could achieve the required vaccination rate to prevent the spread of the Covid virus.
+            The government should pay attention to this situation to enhance their vaccination and registration rate to make sure each state could achieve the required vaccination rate to prevent the spread of the COVID virus.
         ''')
 
 
@@ -307,12 +307,12 @@ def page_eda():
             st.image(im, caption='Correlation heatmap')
 
 
-    with st.expander('EDA 10 - Rate of Serious Vaccine Side Effect  VS Covid Death Rate without obtaining vaccine, which one is more dangerous?', expanded=isExpand):
-        st.subheader('Rate of Serious Vaccine Side Effect  VS Covid Death Rate without obtaining vaccine, which one is more dangerous?')
+    with st.expander('EDA 10 - Rate of Serious Vaccine Side Effect  VS COVID Death Rate without obtaining vaccine, which one is more dangerous?', expanded=isExpand):
+        st.subheader('Rate of Serious Vaccine Side Effect  VS COVID Death Rate without obtaining vaccine, which one is more dangerous?')
         st.markdown('''
-            Some people refuse to obtain vaccines because they think vaccines are dangerous and high risk. In this question, we will measure the rate of serious side effects of vaccination and covid death rate if without obtaining a vaccine to evaluate whether reducing it is a good choice or not. 
+            Some people refuse to obtain vaccines because they think vaccines are dangerous and high risk. In this question, we will measure the rate of serious side effects of vaccination and COVID death rate if without obtaining a vaccine to evaluate whether reducing it is a good choice or not. 
             
-            We divide the total number of covid deaths without obtaining a vaccine and divide with the total number of people without obtaining a vaccine then multiply with 100 to obtain the rate of covid death without obtaining the vaccine. Besides, we sum out the number of serious side effect cases and divide the total number of people obtaining the vaccine then multiply it to 100 to obtain the rate of the serious side effect. We use both rates to multiply 1000 to obtain the number of death or serious side effects cases for every 1000 people. The figure above shows the results of the measures. As we can see, for every 1000 people, about 200 people without obtaining a vaccine will die because of covid. But only about 2 people may get a serious vaccine side effect for every 1000 people. 
+            We divide the total number of covid deaths without obtaining a vaccine and divide with the total number of people without obtaining a vaccine then multiply with 100 to obtain the rate of COVID death without obtaining the vaccine. Besides, we sum out the number of serious side effect cases and divide the total number of people obtaining the vaccine then multiply it to 100 to obtain the rate of the serious side effect. We use both rates to multiply 1000 to obtain the number of death or serious side effects cases for every 1000 people. The figure above shows the results of the measures. As we can see, for every 1000 people, about 200 people without obtaining a vaccine will die because of COVID. But only about 2 people may get a serious vaccine side effect for every 1000 people. 
         ''')
         col1, col2 = st.columns(2)
         with col1:
@@ -324,7 +324,7 @@ def page_eda():
 
 
         st.markdown('''
-            The result at the left is evidence to show it is more dangerous if you do not obtain any vaccine. The figure  at the right shows the ratio of serious vaccine side effect cases in the number of covid deaths without obtaining any vaccine for every 1000 people. We can find a ratio of serious vaccine side effects not greater than 1%. So that, in a nutshell, obtaining a vaccine is a safer and smart decision to protect your life. 
+            The result at the left is evidence to show it is more dangerous if you do not obtain any vaccine. The figure  at the right shows the ratio of serious vaccine side effect cases in the number of COVID deaths without obtaining any vaccine for every 1000 people. We can find a ratio of serious vaccine side effects not greater than 1%. So that, in a nutshell, obtaining a vaccine is a safer and smart decision to protect your life. 
         ''')
 
 
@@ -398,7 +398,7 @@ def page_clustering():
         st.markdown('''
             The figure above shows the states clustering based on daily deaths cases. As we can see there is one state as a red cluster. The deaths slightly increase from September 2020 to March 2021 and a significant increase in deaths cases in June 2021. Besides, there are four states as green clusters, which are Kuala Lumpur, Melaka, Selangor, and Negeri Sembilan again. The death cases in green clusters keep increasing more rapidly if compared with states in blue clusters from June to September 2021. Furthermore, states in blue clusters perform more stable trends of death cases if compared with another two clusters. 
 
-            According to this figure, we can conclude that Labuan is not doing well in handling covid cases. In both figures, it performed a very significant increase in June 2021, and from November to March 2021, it also slightly increased its death cases but other states didn’t have the same problems. For states in the blue cluster, although their daily cases are slightly higher than states in the green cluster, their death cases are much more stable if compared with states in the green cluster. So, states in the blue cluster perform better in handling covid cases and problems.       
+            According to this figure, we can conclude that Labuan is not doing well in handling COVID cases. In both figures, it performed a very significant increase in June 2021, and from November to March 2021, it also slightly increased its death cases but other states didn’t have the same problems. For states in the blue cluster, although their daily cases are slightly higher than states in the green cluster, their death cases are much more stable if compared with states in the green cluster. So, states in the blue cluster perform better in handling COVID cases and problems.       
         ''')
 
     st.write('') 
@@ -412,9 +412,12 @@ def page_clustering():
 def page_regression():
 
     st.title('📈Regression Models')
-    st.write('''In short, this section explains how we use historical cases data (data from past 7 days) to predict cases 
+    st.write('''
+    ## By utilizing the previous COVID-19 records, is it possible to construct a model capable of predicting the number of cases for the upcoming day or week?
+
+    In short, this section explains how we use historical cases data (data from past 7 days) to predict cases 
     moving average for tomorrow or next week using [supervised learning for time series forecasting](https://machinelearningmastery.com/time-series-forecasting-supervised-learning/).''')
-    st.write('## Data Preprocessing')
+    st.write('### Data Preprocessing')
     st.write(''' Firstly, The data is first being preprocessed and merged data from cases, tests, deaths, and vaccination. The date stamps are 
     2020-01-31 to 2021-10-02, 611 rows in total. The NaN is filled with 0 because deaths and vaccination only started at 
     some point and hence they are not an error or outlier. Then we calculate the next day’s moving average “ma7_next_day" 
@@ -424,9 +427,9 @@ def page_regression():
     X_train = pickle.load(open('pickle_files/classification_X_train.pkl', 'rb'))
     y_train = pickle.load(open('pickle_files/classification_y_train.pkl', 'rb'))
     
-    st.write('### X train, dimensions')
+    st.write('#### X train, dimensions')
     st.write(X_train.head())
-    st.write('### y train, to be predicticted')
+    st.write('#### y train, to be predicticted')
     st.write('Binned moving average of next day')
     st.write(y_train.head())
     st.write('Another worth mentioning part is the y train is being binned using median sample bin. This')
@@ -437,7 +440,7 @@ def page_regression():
     im2 = Image.open('images/DM_class_reg_data_median_bin2.png')
     col2.image(im2, width=400, caption='Sample bin median')
 
-    st.write('### Feature Importance')
+    st.write('#### Feature Importance')
     col1, col2 = st.columns([8, 9])
     im = Image.open('images/DM_class_reg_heatmap.png')
     col1.image(im, width=500, caption='Heatmap for All Features')
@@ -447,7 +450,7 @@ def page_regression():
     col2.image(im, width=500, caption='SHAP values of each features 2')
 
     st.markdown('''
-    #### Regression Models
+    ### Regression Models
 
     Regression models that will be used:\n
     1. Linear Regression
@@ -493,7 +496,9 @@ def page_classification():
 
     st.title('📊Classification')
     st.write('''
-    This is the continuation of Regression usign similar [dataset](#data-preprocessing). A gentle reminder, do visit 
+    ## By utilizing the previous COVID-19 records, is it possible to construct a model capable of classifying the number of cases for the upcoming day or week?
+
+    This is the continuation of Regression using similar [dataset](#data-preprocessing). A gentle reminder, do visit 
     regression page before diving into this classification section.
     ''')
 
