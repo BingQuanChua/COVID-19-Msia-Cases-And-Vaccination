@@ -466,7 +466,7 @@ def page_regression():
 
     st.write('''
     Example for Support Vector Regressor\n
-    ```
+    ```Python
     reg_sv = SVR(kernel='linear')\n
     reg_sv = reg_sv.fit(X_train, np.ravel(y_train))\n
     y_pred = reg_sv.predict(X_test)

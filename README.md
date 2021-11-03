@@ -3,20 +3,22 @@
 An in-depth extension of our previous [Assignment](https://github.com/BingQuanChua/COVID-19-Msia-Mining).
 
 
-
 ## 📚Datasets	
 
 Data taken as of **`6-10-2021`** (cut off date)
 
+Data source:
+
 1. COVID-19 Open Data from the Minister of Health (MoH)
-   https://github.com/MoH-Malaysia/covid19-public
+   <a href='https://github.com/MoH-Malaysia/covid19-public' target="_blank">https://github.com/MoH-Malaysia/covid19-public</a>
 
 2. Vaccination Data from COVID-19 Immunisation Task Force (CITF)
-   https://github.com/CITF-Malaysia/citf-public
-
+   <a href='https://github.com/CITF-Malaysia/citf-public' target="_blank">https://github.com/CITF-Malaysia/citf-public</a>
 
 
 ## 📖Table of Contents
+
+A list of questions that we have came up with.
 
 ### **Exploratory Data Analysis**
 
@@ -44,33 +46,29 @@ Data taken as of **`6-10-2021`** (cut off date)
 * Is it possible for the government to predict the number of daily new cases accurately based on past data in order to deploy appropriate movement control measures?
 
 
-
 ## 🐱‍💻Deployment
 
-Our results are deployed to Heroku using in the form of a Streamlit webapp.
+Our results are deployed on Heroku in the form of a Streamlit webapp.
 
-Check out our page! https://covid-19-msia-cases-and-vax.herokuapp.com/
-
+Check out our project on <a href="https://covid-19-msia-cases-and-vax.herokuapp.com/" target="_blank"> Heroku </a>!
 
 Screenshots:
 
 <img src="images/page_navigation.gif">
 
-<p align="center"> Fig.1 Navigation </p>
-
----
+<p align="center"> Navigate across findings easily </p>
 
 <img src="images/page_showcase.gif">
 
-<p align="center"> Fig.2 Clustering Analysis </p>
-
+<p align="center"> Clustering Analysis </p>
 
 
 ## 📑References
 
 1. [COVID-19: What Is Hidden Behind the Official Numbers?](https://towardsdatascience.com/which-countries-are-affected-the-most-by-covid-19-4d4570852e31)
-2. [Data Visualization: Deploying an Interactive Map as a Web App with Heroku](https://medium.com/analytics-vidhya/data-visualization-deploying-an-interactive-map-as-a-web-app-with-heroku-51a323029e4)
-3. [How to Develop LSTM Models for Time Series Forecasting](https://machinelearningmastery.com/how-to-develop-lstm-models-for-time-series-forecasting/)
-4. [Time Series Prediction with LSTM Recurrent Neural Networks in Python with Keras](https://machinelearningmastery.com/time-series-prediction-lstm-recurrent-neural-networks-python-keras/)
-5. [Evaluate the Performance Of Deep Learning Models in Keras](https://machinelearningmastery.com/evaluate-performance-deep-learning-models-keras/)
-6. [Multivariate Time Series Forecasting with LSTMs in Keras](https://machinelearningmastery.com/multivariate-time-series-forecasting-lstms-keras/)
+2. [How to Develop LSTM Models for Time Series Forecasting](https://machinelearningmastery.com/how-to-develop-lstm-models-for-time-series-forecasting/)
+3. [Time Series Prediction with LSTM Recurrent Neural Networks in Python with Keras](https://machinelearningmastery.com/time-series-prediction-lstm-recurrent-neural-networks-python-keras/)
+4. [Evaluate the Performance Of Deep Learning Models in Keras](https://machinelearningmastery.com/evaluate-performance-deep-learning-models-keras/)
+5. [Multivariate Time Series Forecasting with LSTMs in Keras](https://machinelearningmastery.com/multivariate-time-series-forecasting-lstms-keras/)
+6. [Stationarity in Time Series Analysis Explained using Python](https://blog.quantinsti.com/stationarity/)
+7. [Time Series Analysis using ARIMA and LSTM(in Python and Keras)](https://medium.com/analytics-vidhya/time-series-analysis-using-arima-and-lstm-in-python-and-keras-part1-f987e11f9f8c)   
