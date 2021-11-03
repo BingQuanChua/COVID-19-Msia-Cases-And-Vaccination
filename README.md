@@ -9,10 +9,10 @@ Data taken as of **`6-10-2021`** (cut off date)
 
 Data source:
 
-1. COVID-19 Open Data from the Minister of Health (MoH)
+1. COVID-19 Open Data from the Minister of Health (MoH)  
    <a href='https://github.com/MoH-Malaysia/covid19-public' target="_blank">https://github.com/MoH-Malaysia/covid19-public</a>
 
-2. Vaccination Data from COVID-19 Immunisation Task Force (CITF)
+2. Vaccination Data from COVID-19 Immunisation Task Force (CITF)  
    <a href='https://github.com/CITF-Malaysia/citf-public' target="_blank">https://github.com/CITF-Malaysia/citf-public</a>
 
 

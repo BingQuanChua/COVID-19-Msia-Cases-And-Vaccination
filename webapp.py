@@ -52,7 +52,7 @@ def page_eda():
     isExpand = st.checkbox('Expand all questions')
     
 
-    with st.expander('EDA 1: Analyse which group of population are more vulnerable to COVID cases in Malaysia.', expanded=isExpand):
+    with st.expander('EDA 1 - Analyse which group of population are more vulnerable to COVID cases in Malaysia.', expanded=isExpand):
         st.subheader('Which group of population are more vulnerable to COVID cases in Malaysia.')
 
         col1, col2 = st.columns((5,5))
@@ -66,7 +66,7 @@ def page_eda():
         st.write('Based on the observation, we can deduce that the population that are aged around 18-59, unvaccinated, and active in workfleids have the highest risk in getting covid-19.')
 
 
-    with st.expander('EDA 2: Analyse how COVID cases vary across time dimensions at different granularity.', expanded=isExpand):
+    with st.expander('EDA 2 - Analyse how COVID cases vary across time dimensions at different granularity.', expanded=isExpand):
         st.subheader('How COVID cases vary across time dimensions at different granularity.')
         
         im = Image.open('images/EDA02_1.png')
@@ -88,7 +88,7 @@ def page_eda():
         st.write('Same oberservation based on week number, the cases tend to spike when it nears 3rd or 4th quater of the year. But beware the the relative scale of 2020 is not the same as 2021')
         
     
-    with st.expander('EDA 3: What is the stationarity of the time-series dataset?', expanded=isExpand):
+    with st.expander('EDA 3 - What is the stationarity of the time-series dataset?', expanded=isExpand):
         st.subheader('What is the stationarity of the time-series dataset?')
 
         st.write('''In Econometrics, a stationary time series is one whose properties do not depend on the time at which the series is observed. Thus, time series with trends, or with seasonality,
