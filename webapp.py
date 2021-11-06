@@ -18,18 +18,14 @@ def main():
     # Sidebar
     st.sidebar.title("Malaysia COVID-19 Cases and Vaccination")
     st.sidebar.write('''
-        presented by:  
-        Chua Bing Quan  
-        Liew Kuan Yung  
-        Soh Jing Guan  
+        This project aims to gain insight to Malaysia's COVID-19 pandemic using data mining techniques.
 
         ---
     ''')
     st.sidebar.subheader("🧭Navigation")
-    choice = st.sidebar.radio("go to", ('COVID-19 and Vaccination', 'Exploratory Data Analysis', 'Clustering Analysis',
-                              'Regression', 'Classification', 'Time-Series Regression'), index=0)
+    choice = st.sidebar.radio("go to", ('COVID-19 Dataset', 'Exploratory Data Analysis', 'Clustering Analysis', 'Regression', 'Classification', 'Time-Series Regression'), index=0)
 
-    if choice == 'COVID-19 and Vaccination':
+    if choice == 'COVID-19 Dataset':
         page_dataset()
     elif choice == 'Exploratory Data Analysis':
         page_eda()
@@ -42,24 +38,134 @@ def main():
     elif choice == 'Time-Series Regression':
         page_time_series_regression()
 
+    st.sidebar.write('---')
+    st.sidebar.subheader("Presented by")
+    st.sidebar.write(''' 
+        Bing Quan, Kuan Yung and Jing Guan
+    ''')
+
 
 def page_dataset():
 
-    st.title('💉COVID-19 and Vaccination Dataset')
+    st.title('🦠COVID-19 Dataset')
     st.markdown('''
-        1. [COVID-19 Open Data from the Minister of Health (MoH)](https://github.com/MoH-Malaysia/covid19-public)
-        2. [Vaccination Data from COVID-19 Immunisation Task Force (CITF)](https://github.com/CITF-Malaysia/citf-public)
-
+        Our data was obtained from [COVID-19 Open Data by the Minister of Health (MoH)](https://github.com/MoH-Malaysia/covid19-public) and [Vaccination Data by COVID-19 Immunisation Task Force (CITF)](https://github.com/CITF-Malaysia/citf-public)
+        
+        Note: Basic data cleaning and pre-processing was done in a set of separate Jupyter notebooks. 
     ''')
+    st.markdown('''
+        ### Categories
+        The two dataset were combined and categorized into `Epidemic`, `Vaccination and Registration`, and `MySejahtera` according to their purposes.
+    ''')
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        with st.expander('Epidemic'):
+            st.info('''
+                #### Epidemic
+                This category contains all files related to the general epidemic. For example the number of daily cases, tests and deaths in each state and also in Malaysia as a whole. Includes all COVID-19 clusters, hospitals, ICU and PKRC (Quarantine and Treatment Centre) data too.
+                #
+                Files that are included in this category: 
+
+                * cases_malaysia.csv
+                * cases_state.csv
+                * tests_malaysia.csv
+                * tests_state.csv
+                * deaths_malaysia.csv
+                * deaths_state.csv
+                * cluster.csv
+                * hospital.csv
+                * icu.csv
+                * pkrc.csv
+
+                #
+            ''') # bad formatting idea 
+    with col2:
+        with st.expander('Vaccination and Registration'):
+            st.info('''
+                #### Vaccination and Registration
+                Data related to vaccination and registration. Records the number of people daily registration for vaccination and the vaccines given to Malaysians on a daily basis. Contains data recording the side effects of different vaccines too.
+                #
+                Files that are included in this category: 
+
+                * vax_malaysia.csv
+                * vax_state.csv
+                * aef.csv
+                * aefi_serious.csv
+                * vaxreg_malaysia.csv
+                * vaxreg_state.csv
+
+                # 
+                # 
+                #
+                # 
+            ''') 
+    with col3:
+        with st.expander('MySejahtera'):
+            st.info('''
+                #### MySejahtera
+
+                This category contains all data obtained from the MySejatera app. This includes the number of unique check-ins in each state and also in the whole Malaysia. It also records the number of unique check-in locations.
+                ##
+                ###
+                ###
+                Files that are included in this category: 
+
+                * checkin_malaysia.csv
+                * checkin_state.csv
+                * checkin_malaysia_time.csv
+                * trace_malaysia.csv   
+                
+                #
+                #
+                #
+                #
+                #
+                ###
+            ''')
+
+    st.write('### Data Cleaning')
+    st.success('''
+        #### Dataset without any missing value
+        ##### Epidemic
+
+        ##### Vaccination and Registration
+
+        ##### MySejahtera
+        * checkin_malaysia.csv
+        * checkin_state.csv
+        * checkin_malaysia_time.csv
+    ''')
+
+    st.error('''
+        #### Dataset with missing value
+        ##### Epidemic
+
+        ##### Vaccination and Registration
+        
+        ##### MySejahtera
+        * trace_malaysia.csv
+    ''')
+    st.info('''
+        #### Handling outliers
+        Outlier are not handled but kept.
+    ''')
+    st.warning('''
+        #### Dropping Missing Value
+        ##### Epidemic
+
+        ##### Vaccination and Registration
+        
+        ##### MySejahtera
+        * trace_malaysia.csv
+    ''')
+
 
 
 def page_eda():
 
     st.title('🔎Exploratory Data Analaysis')
     st.markdown('''
-        Our data was obtained from the Minister of Health (MoH) and COVID-19 Immunisation Task Force (CITF). Due to such large amount of data, a more than simple exploratory data analysis must be done. We came up with a set of questions to help us understand the data more.
-        
-        Note: Basic data cleaning and pre-processing was done in a separate Jupyter notebook. 
+        We came up with a set of questions to help us understand the data more.
     ''')
     isExpand = st.checkbox('Expand all questions')
     
@@ -390,7 +496,7 @@ def page_clustering():
 
     with col2:
         st.subheader('States and their clusters')
-        st.write(df_map[['state', cluster_attr]])
+        st.table(df_map[['state', cluster_attr]])
 
     st.write('') 
     st.write('')
@@ -398,7 +504,7 @@ def page_clustering():
     
     if cluster == 'Daily COVID-19 Cases':
         st.markdown('''
-            The figure above shows the results of clustering according to the daily_cases. There is 1 state cluster as red clusters. Which is Labuan. The trends of daily cases slightly increase between 2020 October to 2021 March and significantly increase when 2021 June. In 2021 July, the cases start decreasing.  
+            The figure above shows the results of clustering according to the daily cases. There is 1 state cluster as red clusters. Which is Labuan. The trends of daily cases slightly increase between 2020 October to 2021 March and significantly increase when 2021 June. In 2021 July, the cases start decreasing.  
 
             Next, there are 4 states as green clusters. Which are Kuala Lumpur, Melaka, Selangor and Negeri Sembilan. The cases of these states are quite stable until 2021 Jun, the cases start increasing until 2021 July, then cases decrease. 
 
@@ -455,11 +561,11 @@ def page_regression():
     st.write('#### Feature Importance')
     col1, col2 = st.columns([8, 9])
     im = Image.open('images/DM_class_reg_heatmap.png')
-    col1.image(im, width=500, caption='Heatmap for All Features')
+    col1.image(im, caption='Heatmap for All Features')
     im = Image.open('images/DM_class_reg_SHAP1.png')
-    col2.image(im, width=500, caption='SHAP values of each features')
+    col2.image(im, caption='SHAP values of each features')
     im = Image.open('images/DM_class_reg_SHAP2.png')
-    col2.image(im, width=500, caption='SHAP values of each features 2')
+    col2.image(im, caption='SHAP values of each features 2')
 
     st.markdown('''
     ### Regression Models
@@ -522,6 +628,7 @@ def page_classification():
     2. Naive Bayes Classifier
     3. Decision Tree Classifier
     4. Random Forest Classifier
+    5. Support Vector Classifier
 
     Performance evaluation metrics that will be used:\n
     1. Confusion Matrix
@@ -541,7 +648,7 @@ def page_classification():
 
     st.write('### Confusion Matrix')
     im = Image.open('images/DM_class_reg_confusionMatrix.png')
-    st.image(im, caption='Confusion Matrix')
+    st.image(im)
     im = Image.open('images/DM_class_reg_confusionMatrix2.png')
     st.image(im, caption='Confusion Matrix')
 
@@ -550,7 +657,7 @@ def page_classification():
 
     st.write('### Precision & Recall')
     im = Image.open('images/DM_class_reg_ROC1.png')
-    st.image(im, caption='F1-Score')
+    st.image(im)
     im = Image.open('images/DM_class_reg_ROC2.png')
     st.image(im, caption='F1-Score')
 
