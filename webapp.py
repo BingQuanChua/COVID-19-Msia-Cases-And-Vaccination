@@ -26,10 +26,12 @@ def main():
         ---
     ''')
     st.sidebar.subheader("🧭Navigation")
-    choice = st.sidebar.radio("go to", ('Exploratory Data Analaysis', 'Clustering Analysis',
+    choice = st.sidebar.radio("go to", ('COVID-19 and Vaccination', 'Exploratory Data Analysis', 'Clustering Analysis',
                               'Regression', 'Classification', 'Time-Series Regression'), index=0)
 
-    if choice == 'Exploratory Data Analaysis':
+    if choice == 'COVID-19 and Vaccination':
+        page_dataset()
+    elif choice == 'Exploratory Data Analysis':
         page_eda()
     elif choice == 'Clustering Analysis':
         page_clustering()
@@ -39,6 +41,16 @@ def main():
         page_classification()
     elif choice == 'Time-Series Regression':
         page_time_series_regression()
+
+
+def page_dataset():
+
+    st.title('💉COVID-19 and Vaccination Dataset')
+    st.markdown('''
+        1. [COVID-19 Open Data from the Minister of Health (MoH)](https://github.com/MoH-Malaysia/covid19-public)
+        2. [Vaccination Data from COVID-19 Immunisation Task Force (CITF)](https://github.com/CITF-Malaysia/citf-public)
+
+    ''')
 
 
 def page_eda():
