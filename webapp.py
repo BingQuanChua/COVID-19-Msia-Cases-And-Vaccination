@@ -18,7 +18,7 @@ def main():
     # Sidebar
     st.sidebar.title("Malaysia COVID-19 Cases and Vaccination")
     st.sidebar.write('''
-        This project aims to gain insight to Malaysia's COVID-19 pandemic using data mining techniques.
+        This project aims to gain insight into Malaysia's COVID-19 pandemic using data mining techniques.
 
         ---
     ''')
@@ -681,7 +681,7 @@ def page_time_series_regression():
 
             | Evaluation                    | LSTM-Based RNN |
             | ----------------------------- | -------------- |
-            | Root Mean Square Error (RMSE) | 7740.403       |
+            | Root Mean Square Error (RMSE) | 7179.562       |
         ''')
     with col2:
         im = Image.open('images/LSTM_1.png')
@@ -723,7 +723,7 @@ def page_time_series_regression():
 
         | Evaluation                    | Multivariate LSTM-Based RNN |
         | ----------------------------- | --------------------------- |
-        | Root Mean Square Error (RMSE) | 1640.952                    |
+        | Root Mean Square Error (RMSE) | 1143.778                    |
 
 
     ''')
@@ -732,7 +732,7 @@ def page_time_series_regression():
     st.write('')
     
     im = Image.open('images/LSTM_3.png')
-    st.image(im, caption='Actual and Predicted results for COVID-19 Cases using Multivariate LSTMnet')
+    st.image(im, caption='Actual and Predicted results for COVID-19 Cases using Multivariate LSTM')
     
     st.write('---')
     st.subheader('Stationary Time-Series and Non-stationary Time-Series')
@@ -742,14 +742,22 @@ def page_time_series_regression():
         The daily number of COVID-19 cases in Malaysia is a non-stationary time-series data, hence the prediction results are not accurate.    
     ''')
 
-    im = Image.open('images/LSTM_5.png')
-    st.image(im, caption='Stationary Time-Series and Non-stationary Time-Series')
+    col1, col2 = st.columns([8, 10])
+    with col1:
+        im = Image.open('images/LSTM_5_2.png')
+        st.image(im, caption='Stationary Time-Series and Non-stationary Time-Series')
+    with col2:
+        st.write('#')
+        st.write('#')
+        im = Image.open('images/LSTM_6.png')
+        st.image(im, caption='Overview of Daily Recorded COVID-19 Cases in Malaysia from 2020-01-25 to 2021-10-05')
 
     st.markdown('''
         References:
 
         1. [Stationarity in Time Series Analysis Explained using Python](https://blog.quantinsti.com/stationarity/)
         2. [Time Series Analysis using ARIMA and LSTM(in Python and Keras)](https://medium.com/analytics-vidhya/time-series-analysis-using-arima-and-lstm-in-python-and-keras-part1-f987e11f9f8c)    
+        3. [Automated Hybrid Time Series Forecasting: Design, Benchmarking, and Use Cases](https://www.researchgate.net/publication/348592737_Automated_Hybrid_Time_Series_Forecasting_Design_Benchmarking_and_Use_Cases)
     ''')
 
 
