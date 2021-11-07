@@ -59,7 +59,7 @@ def page_dataset():
     ''')
     col1, col2, col3 = st.columns(3)
     with col1:
-        with st.expander('Epidemic'):
+        with st.expander('Epidemic', expanded=True):
             st.info('''
                 #### Epidemic
                 This category contains all files related to the general epidemic. For example the number of daily cases, tests and deaths in each state and also in Malaysia as a whole. Includes all COVID-19 clusters, hospitals, ICU and PKRC (Quarantine and Treatment Centre) data too.
@@ -80,7 +80,7 @@ def page_dataset():
                 #
             ''') # bad formatting idea 
     with col2:
-        with st.expander('Vaccination and Registration'):
+        with st.expander('Vaccination and Registration', expanded=True):
             st.info('''
                 #### Vaccination and Registration
                 Data related to vaccination and registration. Records the number of people daily registration for vaccination and the vaccines given to Malaysians on a daily basis. Contains data recording the side effects of different vaccines too.
@@ -100,7 +100,7 @@ def page_dataset():
                 # 
             ''') 
     with col3:
-        with st.expander('MySejahtera'):
+        with st.expander('MySejahtera', expanded=True):
             st.info('''
                 #### MySejahtera
 
@@ -129,6 +129,12 @@ def page_dataset():
         ##### Epidemic
 
         ##### Vaccination and Registration
+        * vax_malaysia.csv
+        * vax_state.csv
+        * aef.csv
+        * aefi_serious.csv
+        * vaxreg_malaysia.csv
+        * vaxreg_state.csv
 
         ##### MySejahtera
         * checkin_malaysia.csv
@@ -141,20 +147,20 @@ def page_dataset():
         ##### Epidemic
 
         ##### Vaccination and Registration
-        
+        None
         ##### MySejahtera
         * trace_malaysia.csv
     ''')
     st.info('''
         #### Handling outliers
-        Outlier are not handled but kept.
+        Outlier are not handled but kept. This is due to our data being a time-series data, 
     ''')
     st.warning('''
         #### Dropping Missing Value
         ##### Epidemic
 
         ##### Vaccination and Registration
-        
+        None
         ##### MySejahtera
         * trace_malaysia.csv
     ''')
