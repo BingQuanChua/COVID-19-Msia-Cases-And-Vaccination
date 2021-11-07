@@ -187,7 +187,7 @@ def page_eda():
         im = Image.open('images/EDA01_3.png')
         col1.image(im, caption='COVID Cases Group By Cluster Type')
 
-        st.write('Based on the observation, we can deduce that the population that are aged around 18-59, unvaccinated, and active in workfleids have the highest risk in getting covid-19.')
+        st.write('Based on the observation, we can deduce that the population that are aged around 18-59, unvaccinated, and active in workfleids have the highest risk in getting COVID-19.')
 
 
     with st.expander('EDA 2 - Analyse how COVID cases vary across time dimensions at different granularity.', expanded=isExpand):
@@ -436,7 +436,7 @@ def page_eda():
         st.markdown('''
             Some people refuse to obtain vaccines because they think vaccines are dangerous and high risk. In this question, we will measure the rate of serious side effects of vaccination and COVID death rate if without obtaining a vaccine to evaluate whether reducing it is a good choice or not. 
             
-            We divide the total number of covid deaths without obtaining a vaccine and divide with the total number of people without obtaining a vaccine then multiply with 100 to obtain the rate of COVID death without obtaining the vaccine. Besides, we sum out the number of serious side effect cases and divide the total number of people obtaining the vaccine then multiply it to 100 to obtain the rate of the serious side effect. We use both rates to multiply 1000 to obtain the number of death or serious side effects cases for every 1000 people. The figure above shows the results of the measures. As we can see, for every 1000 people, about 200 people without obtaining a vaccine will die because of COVID. But only about 2 people may get a serious vaccine side effect for every 1000 people. 
+            We divide the total number of COVID deaths without obtaining a vaccine and divide with the total number of people without obtaining a vaccine then multiply with 100 to obtain the rate of COVID death without obtaining the vaccine. Besides, we sum out the number of serious side effect cases and divide the total number of people obtaining the vaccine then multiply it to 100 to obtain the rate of the serious side effect. We use both rates to multiply 1000 to obtain the number of death or serious side effects cases for every 1000 people. The figure above shows the results of the measures. As we can see, for every 1000 people, about 200 people without obtaining a vaccine will die because of COVID. But only about 2 people may get a serious vaccine side effect for every 1000 people. 
         ''')
         col1, col2 = st.columns(2)
         with col1:
@@ -516,7 +516,7 @@ def page_clustering():
 
             Lastly, 11 states are red clusters. The trends of cases for these states are also similar to states as green clusters, but the number of cases increases a little bit higher than states in green clusters.
 
-            According to the result of clustering, except Labuan, before June 2021, each of the state's daily cases could be considered stable, most of the states were able to control the daily cases well. But in  June 2021, the cases for each state kept increasing, especially Labuan, whose cases have significantly increased if compared with other states. We can consider that during that period, Labuan was out of control in daily cases. But fortunately, after only about 1 month, Labuan cases have been under control, the cases start decreasing and during that period, other states' daily cases still keep increasing until September then start decreasing. In conclusion, some investigation on Labuan in handling covid cases should be considered especially in Jun 2021 since that time performs a very significant increase of cases which can’t be observed in other states. Besides, states in green clusters and states in red clusters have similar patterns but states in green clusters cases are less than the states in red clusters, which may handle the daily cases better if compared with those states in red or red clusters.
+            According to the result of clustering, except Labuan, before June 2021, each of the state's daily cases could be considered stable, most of the states were able to control the daily cases well. But in  June 2021, the cases for each state kept increasing, especially Labuan, whose cases have significantly increased if compared with other states. We can consider that during that period, Labuan was out of control in daily cases. But fortunately, after only about 1 month, Labuan cases have been under control, the cases start decreasing and during that period, other states' daily cases still keep increasing until September then start decreasing. In conclusion, some investigation on Labuan in handling COVID-19 cases should be considered especially in Jun 2021 since that time performs a very significant increase of cases which can’t be observed in other states. Besides, states in green clusters and states in red clusters have similar patterns but states in green clusters cases are less than the states in red clusters, which may handle the daily cases better if compared with those states in red or red clusters.
         ''')
     else:
         st.markdown('''
@@ -671,7 +671,7 @@ def page_classification():
 def page_time_series_regression():
 
     st.title('⏳Time-Series Regression')
-    st.write('## **Is it possible for the government to predict the number of daily new cases accurately based on past data in order to deploy appropriate movement control measures?**')
+    st.write('## **How can the Malaysian government predict the number of daily new cases accurately based on past data in order to deploy appropriate movement control measures?**')
     st.markdown('''
         With an accurate forecast of the daily new cases, the government would be able to control the vaccination rate to tackle the pandemic effectively. We have implemented a time-series regression to forecast the number of COVID-19 cases in Malaysia. Two LSTM-based RNN is built to aid us in this problem.
     ''')
@@ -743,9 +743,9 @@ def page_time_series_regression():
     st.write('---')
     st.subheader('Stationary Time-Series and Non-stationary Time-Series')
     st.markdown('''
-        We learnt that time-series data can be categorized into stationary and non-stationary. Stationary time-series data tends to be more predictable as the mean and variance normally remains constant and does not possess any trends or seasonality. On the other hand, non-stationary data are considered harder to predict as it is the opposite of stationary data. Other time series regression models such as the ARIMA model perform better forecasts with stationary time-series data. 
+        Time-series data can be categorized into stationary and non-stationary. Stationary time-series data tends to be more predictable as the mean and variance normally remains constant and does not possess any trends or seasonality. On the other hand, non-stationary data are considered harder to predict as it is the opposite of stationary data. The mean and variance tends to fluctuate, making it harder to predict its behavior. 
 
-        The daily number of COVID-19 cases in Malaysia is a non-stationary time-series data, hence the prediction results are not accurate.    
+        The daily number of COVID-19 cases in Malaysia is a non-stationary time-series data, hence the prediction results are not quite accurate.    
     ''')
 
     col1, col2 = st.columns([8, 10])
@@ -759,13 +759,29 @@ def page_time_series_regression():
         st.image(im, caption='Overview of Daily Recorded COVID-19 Cases in Malaysia from 2020-01-25 to 2021-10-05')
 
     st.markdown('''
-        References:
+        Most time series regression models perform better forecasts with stationary time-series data. It is known that LSTM is capable of forecasting non-stationary data. However, stationary data will greatly boost its performance as it is much easier for the neural network to learn. 
+
+        #
+    ''')
+
+    st.subheader('Future Improvements')
+
+    st.markdown('''
+        Since the forecasting result is not quite accurate, future extensions can be done to improve the prediction results. Future work includes:
+
+        1. Transforming non-stationary data into stationary data.
+        2. Choosing more robust models capable of predicting non-stationary data. ARIMA model is known for able to handle 2 types of non-stationarities (hidden trend and unit roots). The ARIMA model might yield a better result in this case. 
+        3. Prepare a larger dataset. More insights might be able to observe from a larger dataset.
+
+        #
+        ---
+        **References**:
 
         1. [Stationarity in Time Series Analysis Explained using Python](https://blog.quantinsti.com/stationarity/)
         2. [Time Series Analysis using ARIMA and LSTM(in Python and Keras)](https://medium.com/analytics-vidhya/time-series-analysis-using-arima-and-lstm-in-python-and-keras-part1-f987e11f9f8c)    
         3. [Automated Hybrid Time Series Forecasting: Design, Benchmarking, and Use Cases](https://www.researchgate.net/publication/348592737_Automated_Hybrid_Time_Series_Forecasting_Design_Benchmarking_and_Use_Cases)
+        4. [How to Remove Non-Stationarity in Time Series Forecasting](https://towardsdatascience.com/how-to-remove-non-stationarity-in-time-series-forecasting-563c05c4bfc7)
     ''')
-
 
 if __name__ == "__main__":
     main()

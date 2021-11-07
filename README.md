@@ -43,22 +43,22 @@ A list of questions that we have came up with.
 
 ### **Time-series Regression**
 
-* Is it possible for the government to predict the number of daily new cases accurately based on past data in order to deploy appropriate movement control measures?
+* How can the Malaysian government predict the number of daily new cases accurately based on past data in order to deploy appropriate movement control measures?
 
 
 ## 🐱‍💻Deployment
 
 Our results are deployed on Heroku in the form of a Streamlit webapp.
 
-Check out our project on <a href="https://covid-19-msia-cases-and-vax.herokuapp.com/" target="_blank"> Heroku </a>!
+Check out our project on <a href="https://covid-19-msia-cases-and-vax.herokuapp.com/" target="_blank">Heroku</a>! Light mode is recommended.
 
 Screenshots:
 
 <img src="images/page_navigation.gif">
 
-<p align="center"> Navigate across findings easily </p>
+<p align="center"> Navigation </p>
 
-<img src="images/page_showcase.gif">
+<img src="images/page_clustering.gif">
 
 <p align="center"> Clustering Analysis </p>
 
@@ -72,3 +72,4 @@ Screenshots:
 5. [Multivariate Time Series Forecasting with LSTMs in Keras](https://machinelearningmastery.com/multivariate-time-series-forecasting-lstms-keras/)
 6. [Stationarity in Time Series Analysis Explained using Python](https://blog.quantinsti.com/stationarity/)
 7. [Time Series Analysis using ARIMA and LSTM(in Python and Keras)](https://medium.com/analytics-vidhya/time-series-analysis-using-arima-and-lstm-in-python-and-keras-part1-f987e11f9f8c)   
+8. [How to Remove Non-Stationarity in Time Series Forecasting](https://towardsdatascience.com/how-to-remove-non-stationarity-in-time-series-forecasting-563c05c4bfc7)
