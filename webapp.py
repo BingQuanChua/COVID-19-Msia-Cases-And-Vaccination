@@ -204,7 +204,7 @@ def page_eda():
         
         im = Image.open('images/EDA02_1.png')
         st.image(im, caption='COVID Cases Over Weekday')
-        st.write('There is no clear indication showing that any particular day have more COVID cases')
+        st.write('There is no clear indication showing that any particular day have more COVID cases. Weekends and weekdays are close to each other as well.')
 
         col1, col2 = st.columns((5,5))
         im = Image.open('images/EDA02_2.png')
@@ -225,7 +225,9 @@ def page_eda():
         st.subheader('What is the stationarity of the time-series dataset?')
 
         st.write('''In Econometrics, a stationary time series is one whose properties do not depend on the time at which the series is observed. Thus, time series with trends, or with seasonality,
-         are not stationary — the trend and seasonality will affect the value of the time series at different times. In order to identify the stationarity of the time series, we use Dickey Fuller test''')
+         are not stationary — the trend and seasonality will affect the value of the time series at different times. In order to identify the stationarity of the time series, we use 
+         [Dickey Fuller test](https://machinelearningmastery.com/time-series-data-stationary-python/#:~:text=series%20is%20stationary.-,Augmented%20Dickey-Fuller%20test,-Statistical%20tests%20make)
+         ''')
 
         EDA3 = st.selectbox('Check Stationarity Of:', \
         ['COVID Cases', 'COVID Deaths', 'Cluster Tracing', 'MySejahtera Checkins'])
