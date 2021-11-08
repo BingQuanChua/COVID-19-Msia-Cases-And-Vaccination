@@ -57,8 +57,10 @@ def page_dataset():
         ### Categories
         The two dataset were combined and categorized into `Epidemic`, `Vaccination and Registration`, and `MySejahtera` according to their purposes.
     ''')
-    col1, col2, col3 = st.columns(3)
-    with col1:
+    
+    col_1, col_2, col_3 = st.columns(3)
+    
+    with col_1:
         with st.expander('Epidemic', expanded=True):
             st.info('''
                 #### Epidemic
@@ -79,7 +81,7 @@ def page_dataset():
 
                 #
             ''') # bad formatting idea 
-    with col2:
+    with col_2:
         with st.expander('Vaccination and Registration', expanded=True):
             st.info('''
                 #### Vaccination and Registration
@@ -99,7 +101,7 @@ def page_dataset():
                 #
                 # 
             ''') 
-    with col3:
+    with col_3:
         with st.expander('MySejahtera', expanded=True):
             st.info('''
                 #### MySejahtera
@@ -127,6 +129,12 @@ def page_dataset():
     st.success('''
         #### Dataset without any missing value
         ##### Epidemic
+        * cases_state.csv
+        * tests_malaysia.csv
+        * tests_state.csv
+        * deaths_malaysia.csv
+        * deaths_state.csv
+        * clusters.csv
 
         ##### Vaccination and Registration
         * vax_malaysia.csv
@@ -145,7 +153,7 @@ def page_dataset():
     st.error('''
         #### Dataset with missing value
         ##### Epidemic
-
+        * cases_malaysia.csv
         ##### Vaccination and Registration
         None
         ##### MySejahtera
@@ -153,12 +161,13 @@ def page_dataset():
     ''')
     st.info('''
         #### Handling outliers
-        Outlier are not handled but kept. This is due to our data being a time-series data, 
+        Outlier are not being removed but kept. This is due to the outlier of our data are not an error. 
+        However, moving average is used for time-series analysis to reduce "noises" caused by outliers.
     ''')
     st.warning('''
         #### Dropping Missing Value
         ##### Epidemic
-
+        * cases_malaysia.csv splitted into 2 dataset, one retains the missing values, the other one removes the missing values.
         ##### Vaccination and Registration
         None
         ##### MySejahtera
@@ -543,13 +552,33 @@ def page_regression():
     st.write('''
     ## By utilizing the previous COVID-19 records, is it possible to construct a model capable of predicting the number of cases for the upcoming day or week?
 
-    In short, this section explains how we use historical cases data (data from past 7 days) to predict cases 
-    moving average for tomorrow or next week using [supervised learning for time series forecasting](https://machinelearningmastery.com/time-series-forecasting-supervised-learning/).''')
+    In another words, how can we use previous week's data (data from past 7 days) to predict or forecast number of covid cases for next day or next week using 
+    [supervised learning for time series forecasting](https://machinelearningmastery.com/time-series-forecasting-supervised-learning/).''')
     st.write('### Data Preprocessing')
-    st.write(''' Firstly, The data is first being preprocessed and merged data from cases, tests, deaths, and vaccination. The date stamps are 
-    2020-01-31 to 2021-10-02, 611 rows in total. The missing values are filled with 0 because deaths and vaccination only started at 
-    some point and hence they are not an error or outlier. Then we calculate the next day’s moving average `ma7_next_day` 
-    attribute using a sliding window calculation and [sample-bin them using the median](https://towardsdatascience.com/data-preprocessing-with-python-pandas-part-5-binning-c5bd5fd1b950) 
+    st.write(''' 
+    1. The data is first being cleaned and merged data from `cases`, `tests`, `deaths`, and `vaccination`. The date stamps are 
+    **2020-01-31** to **2021-10-02**, 611 rows in total. 
+    2. The missing values are filled with 0 because deaths and vaccination only started at some point and hence they are not an error or outlier. 
+    3. Then normalize all attributes and calculate their moving average using a sliding window calculation.
+    4. The moving average of covid cases of next day is duplicated and shifted 1 row up. See example below:
+
+    | Date      | cases   | cases_duplicated|
+    |-----------|---------|-----------------|
+    | 22/1/2021 | 10      | 10              |
+    | 23/1/2021 | 20      | 20              |
+    | 24/1/2021 | 30      | 30              |
+
+    Then "cases_duplicated" will undergo `Shift(-1)`
+
+    | Date      | cases   | cases_duplicated|
+    |-----------|---------|-----------------|
+    | 22/1/2021 | 10      | 20              |
+    | 23/1/2021 | 20      | 30              |
+    | 24/1/2021 | 30      | data from 25/1  |
+
+    "cases_duplicated" become covid cases of next day.
+
+    5. The next_day data (aka. y_train) is [sample-binned using the median](https://towardsdatascience.com/data-preprocessing-with-python-pandas-part-5-binning-c5bd5fd1b950) 
     for classification later.''')
 
     X_train = pickle.load(open('pickle_files/classification_X_train.pkl', 'rb'))
@@ -616,8 +645,7 @@ def page_regression():
     st.write('''
     #### Conclusion
     An interesting observation is that Random Forest and Decision Tree both perform better than SVR and Linear Regressor.
-    We decude the reason behind is because both RF and DT supports non linearity better and the nature of the dataset is 
-    non linear as well.
+    We decude that one of the reason behind this is both RF and DT supports non linearity better.
     ''')
     
 def page_classification():
@@ -670,6 +698,18 @@ def page_classification():
     st.image(im)
     im = Image.open('images/DM_class_reg_ROC2.png')
     st.image(im, caption='Classification Report of each model')
+
+    st.markdown('''
+    ### Observation
+    1. Decision tree and random forest outperforms other classifiers and regressors. The main reason could be they handle non-linearity and colinearity more efficiently. 
+    2. The poor performance of SVM could because SVM suited two-class prediction better. Hence, for supervised time-series machine learning, our experiment result shows that decision tree and random forest performs better. 
+    ''')
+
+    st.markdown('''
+    ### Future Improvement
+    1. Includes other features that are not captured in dataset, for instance, date where government execute MCO.
+    2. The poor results from SVM could due to the imbalance of dataset. Suggest to use SMOTE or other sampling techniques to deal with imbalance issue.
+    ''')
 
 
 def page_time_series_regression():
