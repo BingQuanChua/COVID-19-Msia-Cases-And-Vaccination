@@ -397,7 +397,11 @@ def page_eda():
             im = Image.open('images/EDA07_{:02d}.png'.format(idx))
             st.image(im)
 
-        st.write('It is observed that the number of vaccinated people in some states has exceeded their state population. The two states that have this phenomena are Kuala Lumpur and Putrajaya. This might be due to foreigners receiving their vaccination shot in our country.')
+        st.markdown('''
+            All of the states in Malaysia are gradually recovering. Most states show a decrease in the number of COVID-19 cases when the percentage of vaccinated persons reaches around 28% ~ 47%. Labuan and Negeri Sembilan started to recover at a surprisingly low vaccination rate of 12%. On the other hand, cases in Sarawak starts to decline at 64% while Kuala Lumpur at 54%. 
+
+            The number of vaccinated people in some states has exceeded their state population. The two states that possess this phenomena are Kuala Lumpur and Putrajaya. This phenomenon might be due to foreigners receiving their vaccination shot in our country.
+        ''')
 
 
     with st.expander('EDA 8 - When is the time of the day with most MySejahtera check-ins?', expanded=isExpand):
@@ -543,8 +547,8 @@ def page_regression():
     moving average for tomorrow or next week using [supervised learning for time series forecasting](https://machinelearningmastery.com/time-series-forecasting-supervised-learning/).''')
     st.write('### Data Preprocessing')
     st.write(''' Firstly, The data is first being preprocessed and merged data from cases, tests, deaths, and vaccination. The date stamps are 
-    2020-01-31 to 2021-10-02, 611 rows in total. The NaN is filled with 0 because deaths and vaccination only started at 
-    some point and hence they are not an error or outlier. Then we calculate the next day’s moving average “ma7_next_day" 
+    2020-01-31 to 2021-10-02, 611 rows in total. The missing values are filled with 0 because deaths and vaccination only started at 
+    some point and hence they are not an error or outlier. Then we calculate the next day’s moving average `ma7_next_day` 
     attribute using a sliding window calculation and [sample-bin them using the median](https://towardsdatascience.com/data-preprocessing-with-python-pandas-part-5-binning-c5bd5fd1b950) 
     for classification later.''')
 
@@ -556,7 +560,7 @@ def page_regression():
     st.write('#### y train, to be predicticted')
     st.write('Binned moving average of next day')
     st.write(y_train.head())
-    st.write('Another worth mentioning part is the y train is being binned using median sample bin. This')
+    st.write('Another worth mentioning part is the y train is being binned using median sample bin.')
     
     col1, col2 = st.columns((5,5))
     im1 = Image.open('images/DM_class_reg_data_median_bin.png')
@@ -638,8 +642,8 @@ def page_classification():
 
     Performance evaluation metrics that will be used:\n
     1. Confusion Matrix
-    2. Precision, Recall, F1-score
-    3. ROC Curve
+    2. Precision, Recall & F1-Score
+
     ''')
 
     st.write('### Model Accuracy')
@@ -656,16 +660,16 @@ def page_classification():
     im = Image.open('images/DM_class_reg_confusionMatrix.png')
     st.image(im)
     im = Image.open('images/DM_class_reg_confusionMatrix2.png')
-    st.image(im, caption='Confusion Matrix')
+    st.image(im, caption='Confusion Matrix of each model')
 
     st.write('')
     st.write('')
 
-    st.write('### Precision & Recall')
+    st.write('### Precision, Recall & F1-Score')
     im = Image.open('images/DM_class_reg_ROC1.png')
     st.image(im)
     im = Image.open('images/DM_class_reg_ROC2.png')
-    st.image(im, caption='F1-Score')
+    st.image(im, caption='Classification Report of each model')
 
 
 def page_time_series_regression():
