@@ -687,7 +687,7 @@ def page_time_series_regression():
         st.markdown('''
             The first time-series regression model is a single variate LSTM-based RNN model. The number of daily cases is separated into a train and test set on 2021-07-01. The training set has a total of 523 days and the test set has a total of 97 days.
 
-            A 5 layer LSTM-based RNN with a total of 71,051 trainable parameters has been implemented. Each layer apart from the dense layer has 50 units and a dropout rate of 0.2. After training the model, we used it to predict the test set. The model failed to predict the trend of the daily cases as shown below. The results have a root mean square error of 7740.403.
+            A 5 layer LSTM-based RNN with a total of 71,051 trainable parameters has been implemented. Each layer apart from the dense layer has 50 units and a dropout rate of 0.2. After training the model, we used it to predict the test set. The model failed to predict the trend of the daily cases as shown below. The results have a root mean square error of 7179.562.
 
             | Evaluation                    | LSTM-Based RNN |
             | ----------------------------- | -------------- |
@@ -729,7 +729,7 @@ def page_time_series_regression():
     st.markdown('''
         The resulting dataset has 568 days of data. Similar to the above, we implemented a 5 layer LSTM-based RNN with a total of 73,051 trainable parameters. A lookback of 30 days is used to create our dataset, resulting in 538 days of data. We then get the last 50 days for prediction and the rest of the days for training and validation. The model came to an early stopping at 16 epoch after training and validation data were fed to it.
 
-        After the training, we test our model by predicting the test data. The results show that the model is able to capture the overall downward trend of the number of daily cases in Malaysia but failed to capture the ups and downs in the details. The model has a root mean square error of 1640.952, which is an improvement from the previous model.
+        After the training, we test our model by predicting the test data. The results show that the model is able to capture the overall downward trend of the number of daily cases in Malaysia but failed to capture the ups and downs in the details. The model has a root mean square error of 1143.778, which is an improvement from the previous model.
 
         | Evaluation                    | Multivariate LSTM-Based RNN |
         | ----------------------------- | --------------------------- |
