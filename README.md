@@ -45,12 +45,34 @@ A list of questions that we have came up with.
 
 * How can the Malaysian government predict the number of daily new cases accurately based on past data in order to deploy appropriate movement control measures?
 
+## 📒Jupyter Notebooks
+
+A guide to reading our Jupyter Notebooks.
+
+Reading the dataset, basic data cleaning and simple EDAs for each of the dataset category:
+```
+EDA_Epidemic
+EDA_Vaccination_and_Registration
+EDA_MySejahtera
+```
+
+A deeper exploration into the datasets with questions to gain a better understandings and findings:
+```
+EDA_Questions
+```
+
+Data Mining with Clustering Analysis, Regression, Classification and Time-Series Regression:
+```
+DM_Clustering
+DM_Regression_and_Classification
+DM_Time-Series_Regression
+```
 
 ## 🐱‍💻Deployment
 
 Our results are deployed on Heroku in the form of a Streamlit webapp.
 
-Check out our project on <a href="https://covid-19-msia-cases-and-vax.herokuapp.com/" target="_blank">Heroku</a>! Light mode is recommended.
+Check out our project on <a href="https://covid-19-msia-cases-and-vax.herokuapp.com/" target="_blank">Heroku</a>! Using light mode is recommended.
 
 Screenshots:
 
