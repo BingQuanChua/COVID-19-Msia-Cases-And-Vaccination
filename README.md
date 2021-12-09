@@ -68,7 +68,7 @@ DM_Regression_and_Classification
 DM_Time-Series_Regression
 ```
 
-## 🐱‍💻Deployment
+## 🌱Deployment
 
 Our results are deployed on Heroku in the form of a Streamlit webapp.
 
